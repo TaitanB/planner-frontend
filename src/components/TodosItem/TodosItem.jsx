@@ -5,9 +5,9 @@ import toast from 'react-hot-toast';
 import { MdOutlineDeleteForever, MdBorderColor } from 'react-icons/md';
 import { BsDatabaseCheck } from 'react-icons/bs';
 
-import propTypes from 'prop-types';
+// import propTypes from 'prop-types';
 
-import { getAllTodos } from '../../redux/todos/selectors';
+import { getFilteredTodos } from '../../redux/todos/selectors';
 import {
   fetchDeleteTodo,
   fetchUpdateTodo,
@@ -38,7 +38,7 @@ const TodosItem = ({
 
   const { t } = useTranslation();
 
-  const allTodos = useSelector(getAllTodos);
+  const allTodos = useSelector(getFilteredTodos);
 
   useEffect(() => {
     if (allTodos.length !== 0) {
@@ -229,13 +229,13 @@ const TodosItem = ({
   );
 };
 
-TodosItem.propTypes = {
-  _id: propTypes.string.isRequired,
-  title: propTypes.string.isRequired,
-  description: propTypes.string.isRequired,
-  createdAt: propTypes.string.isRequired,
-  updatedAt: propTypes.string.isRequired,
-  completedDate: propTypes.string,
-};
+// TodosItem.propTypes = {
+//   _id: propTypes.string.isRequired,
+//   title: propTypes.string.isRequired,
+//   description: propTypes.string.isRequired,
+//   createdAt: propTypes.string.isRequired,
+//   updatedAt: propTypes.string.isRequired,
+//   completedDate: propTypes.string,
+// };
 
 export default TodosItem;

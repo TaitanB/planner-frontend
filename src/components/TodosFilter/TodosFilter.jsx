@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, CloseButton } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { getFilter, clearFilter } from '../../redux/todos/filterSlice';
+import { getFilter, clearFilter } from '../../redux/todos/todosSlice';
 import { Filtered } from '../../redux/todos/selectors';
 
 import propTypes from 'prop-types';
 
-const ContactsFilter = filter => {
+const TodosFilter = ({ filter }) => {
   const filterValue = useSelector(Filtered);
 
   const { t } = useTranslation();
@@ -43,8 +43,8 @@ const ContactsFilter = filter => {
   );
 };
 
-ContactsFilter.propTypes = {
+TodosFilter.propTypes = {
   filter: propTypes.string.isRequired,
 };
 
-export default ContactsFilter;
+export default TodosFilter;

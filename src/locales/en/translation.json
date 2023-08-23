@@ -25,7 +25,6 @@
   "cancel": "Cancel",
   "title_list_todo": "Your todos list",
   "all_todos": "All Todos",
-  "filtered_todos": "Filtered Todos",
   "no_todos_text": "You have not added any Todos yet...",
   "welcome": "Welcome",
   "logout": "Logout",
@@ -53,5 +52,7 @@
   "half_year": "Half a year",
   "year": "One year",
   "3_years": "Three years",
-  "5_years": "Five years"
+  "5_years": "Five years",
+  "page": "Pages",
+  "archive": "Archived"
 }

@@ -5,30 +5,49 @@ import { useTranslation } from 'react-i18next';
 
 import TodosList from 'components/TodosList/TodosList';
 import AddTodosForm from 'components/TodosForm/AddTodosForm';
-import ContactsFilter from '../../components/TodosFilter/TodosFilter';
+import TodosFilter from '../../components/TodosFilter/TodosFilter';
+import GetPagination from '../../components/GetPagination/GetPagination';
 import { fetchAllTodos } from 'redux/todos/operations';
-import { Filtered } from '../../redux/todos/selectors';
+import {
+  Filtered,
+  getPage,
+  getTotalPages,
+  getTotalTodos,
+} from '../../redux/todos/selectors';
+import { setPage } from '../../redux/todos/todosSlice';
 
-export default function Contacts() {
+export default function Todos() {
+  const page = useSelector(getPage);
+  const totalPages = useSelector(getTotalPages);
+  const query = useSelector(Filtered);
+  const totalTodos = useSelector(getTotalTodos);
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const filterValue = useSelector(Filtered);
-
   useEffect(() => {
-    dispatch(fetchAllTodos());
-  }, [dispatch]);
+    dispatch(fetchAllTodos({ page, query }));
+  }, [dispatch, page, query, totalTodos]);
+
+  const handlePageChange = newPage => {
+    dispatch(setPage(newPage));
+    dispatch(fetchAllTodos({ page: newPage, query }));
+  };
 
   return (
     <HelmetProvider>
       <Helmet>
         <title>{t('helmet_title_todos_page')}</title>
       </Helmet>
-      <div className="min-vh-100">
+      <div className="d-flex flex-column min-vh-100">
         <AddTodosForm />
         <h1 className="mb-3 pt-5 text-center">{t('title_list_todo')}</h1>
-        <ContactsFilter filter={filterValue} />
-        <TodosList filter={filterValue} />
+        <TodosFilter filter={query} page={page} />
+        <TodosList />
+        <GetPagination
+          page={page}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+        />
       </div>
     </HelmetProvider>
   );

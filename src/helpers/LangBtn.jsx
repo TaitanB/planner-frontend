@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import { LanguageContext } from 'utils/LanguageContext';
 import { ButtonGroup, Button } from 'react-bootstrap';
+
 const LangBtn = () => {
   const { currentLanguage, changeLanguage } = useContext(LanguageContext);
+
   const handleLanguageChange = lang => {
     changeLanguage(lang);
   };
+
   return (
     <ButtonGroup className="p-1 btn-group" role="group">
       <Button

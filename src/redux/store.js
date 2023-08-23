@@ -13,7 +13,6 @@ import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 
 import { todosReducer } from './todos/todosSlice';
-import { filterReducer } from './todos/filterSlice';
 import { authReducer } from './auth/authSlice';
 
 const authPersistConfig = {
@@ -24,7 +23,6 @@ const authPersistConfig = {
 
 const rootReducer = combineReducers({
   todos: todosReducer,
-  filter: filterReducer,
   auth: persistReducer(authPersistConfig, authReducer),
 });
 

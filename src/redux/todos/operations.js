@@ -5,16 +5,33 @@ axios.defaults.baseURL = 'http://localhost:3001';
 
 export const fetchAllTodos = createAsyncThunk(
   'todo/fetchAll',
-  async (_, { rejectWithValue }) => {
+  async ({ page, query }, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/api/todos');
+      const response = await axios.get(
+        `/api/todos?query=${query}&page=${page}`
+      );
 
-      return response.data.todos;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+
+// export const fetchStatusTodos = createAsyncThunk(
+//   'todo/fetchStatus',
+//   async ({ page, query, completed, overdue, archive }, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.get(
+//         `/api/todos/status?query=${query}&page=${page}&completed=${completed}&overdue=${overdue}&archive=${archive}`
+//       );
+
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export const fetchAddTodo = createAsyncThunk(
   'todo/addTodo',

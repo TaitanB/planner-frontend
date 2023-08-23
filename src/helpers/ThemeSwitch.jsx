@@ -29,13 +29,11 @@ export const ThemeSwitch = () => {
   };
 
   return (
-    <>
-      <DarkModeSwitch
-        moonColor="#FFD700"
-        sunColor="#FFD700"
-        checked={isDarkMode}
-        onChange={toggleTheme}
-      />
-    </>
+    <DarkModeSwitch
+      moonColor="#FFD700"
+      sunColor="#FFD700"
+      checked={isDarkMode}
+      onChange={toggleTheme}
+    />
   );
 };
