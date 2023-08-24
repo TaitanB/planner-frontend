@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { MdOutlineDeleteForever, MdBorderColor } from 'react-icons/md';
@@ -7,7 +7,6 @@ import { BsDatabaseCheck } from 'react-icons/bs';
 
 // import propTypes from 'prop-types';
 
-import { getFilteredTodos } from '../../redux/todos/selectors';
 import {
   fetchDeleteTodo,
   fetchUpdateTodo,
@@ -28,7 +27,6 @@ const TodosItem = ({
   completedDate,
   overdueDate,
 }) => {
-  const [checked, setChecked] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [descriptionUpdate, setDescriptionUpdate] = useState(description);
 
@@ -38,19 +36,8 @@ const TodosItem = ({
 
   const { t } = useTranslation();
 
-  const allTodos = useSelector(getFilteredTodos);
-
-  useEffect(() => {
-    if (allTodos.length !== 0) {
-      const initialCheckedState = allTodos.reduce((checkedState, todo) => {
-        if (todo.completedDate !== null) {
-          checkedState[todo._id] = true;
-        }
-        return checkedState;
-      }, {});
-      setChecked(initialCheckedState);
-    }
-  }, [allTodos]);
+  const isCompleted = completedDate !== null;
+  const isOverdue = overdueDate !== null;
 
   useEffect(() => {
     const tooltips = Array.from(
@@ -90,8 +77,6 @@ const TodosItem = ({
     toast.success(`${t('todo_deleted')}`);
   };
 
-  const isCompleted = checked[_id] || false;
-
   const completedToggle = _id => {
     dispatch(fetchCompletedToggle(_id));
 
@@ -102,9 +87,7 @@ const TodosItem = ({
 
   const handleToggle = (e, _id) => {
     e.target.blur();
-    const updatedChecked = { ...checked };
-    updatedChecked[_id] = e.currentTarget.checked;
-    setChecked(updatedChecked);
+
     completedToggle(_id);
   };
 
@@ -116,7 +99,7 @@ const TodosItem = ({
   return (
     <Accordion.Item eventKey={_id}>
       <div className="d-flex gap-3 align-items-center px-3">
-        {overdueDate === null && (
+        {!isOverdue && (
           <Form.Check
             data-bs-toggle="tooltip"
             data-bs-placement="top"
@@ -131,7 +114,7 @@ const TodosItem = ({
             onChange={e => handleToggle(e, _id)}
           />
         )}
-        {overdueDate !== null && (
+        {isOverdue && (
           <Form.Check
             data-bs-toggle="tooltip"
             data-bs-placement="top"
@@ -152,7 +135,7 @@ const TodosItem = ({
             {title}
           </h5>
         </Accordion.Header>
-        {isCompleted || overdueDate !== null ? (
+        {isCompleted || isOverdue ? (
           <Button
             key={`archive-${_id}`}
             data-bs-toggle="tooltip"
@@ -199,14 +182,14 @@ const TodosItem = ({
                   <b> {isCompleted ? getDate(completedDate) : '??.??.????'}</b>
                 </div>
               )}
-              {overdueDate !== null && (
+              {isOverdue && (
                 <div className="text-danger">
                   {t('is_overdue')}: <b>{getDate(overdueDate)}</b>
                 </div>
               )}
               <Button
                 data-bs-title={`${t('edit')}`}
-                disabled={isCompleted || overdueDate !== null}
+                disabled={isCompleted || isOverdue}
                 className="ms-auto btn btn-primary"
                 type="button"
                 onClick={() => setIsEditing(true)}

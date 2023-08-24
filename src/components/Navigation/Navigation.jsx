@@ -27,13 +27,29 @@ export const Navigation = ({ showMenu, setShowMenu }) => {
         {t('header_home')}
       </NavLink>
       {isLoggedIn && (
-        <NavLink
-          className="nav-link d-flex align-items-center justify-content-center"
-          to="/todos"
-          onClick={handleClick}
-        >
-          {t('header_todos')}
-        </NavLink>
+        <>
+          <NavLink
+            className="nav-link d-flex align-items-center justify-content-center"
+            to="/profile"
+            onClick={handleClick}
+          >
+            {t('header_profile')}
+          </NavLink>
+          <NavLink
+            className="nav-link d-flex align-items-center justify-content-center"
+            to="/wheelOfLife"
+            onClick={handleClick}
+          >
+            {t('header_wheel_of_life')}
+          </NavLink>
+          <NavLink
+            className="nav-link d-flex align-items-center justify-content-center"
+            to="/todos"
+            onClick={handleClick}
+          >
+            {t('header_todos')}
+          </NavLink>
+        </>
       )}
     </div>
   );

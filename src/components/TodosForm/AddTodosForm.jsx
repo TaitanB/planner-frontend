@@ -13,6 +13,8 @@ export default function AddTodosForm() {
   const [plannedDate, setPlannedDate] = useState('');
   const [selectedPeriod, setSelectedPeriod] = useState('');
 
+  const [activeAccordionKey, setActiveAccordionKey] = useState(null);
+
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -49,8 +51,19 @@ export default function AddTodosForm() {
     setSelectedPeriod('');
   };
 
+  const handleCancelClick = () => {
+    reset();
+    if (activeAccordionKey === '0') {
+      setActiveAccordionKey(null);
+    }
+  };
+
+  const handleAccordionSelect = key => {
+    setActiveAccordionKey(key);
+  };
+
   return (
-    <Accordion>
+    <Accordion activeKey={activeAccordionKey} onSelect={handleAccordionSelect}>
       <Accordion.Item eventKey="0">
         <Accordion.Header>
           <h3 className="mb-0 ms-auto ">{t('form_add_todo_title')}</h3>
@@ -94,8 +107,16 @@ export default function AddTodosForm() {
                 setSelectedPeriod={setSelectedPeriod}
               />
             </div>
-            <Button variant="primary" type="submit">
+            <Button
+              className="me-3"
+              variant="primary"
+              type="submit"
+              disabled={!title || !description || !selectedPeriod}
+            >
               {t('add_todo')}
+            </Button>
+            <Button variant="secondary" onClick={handleCancelClick}>
+              {t('cancel')}
             </Button>
           </Form>
         </Accordion.Body>

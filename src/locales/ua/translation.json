@@ -1,6 +1,8 @@
 {
   "header_home": "Домашня сторінка",
   "header_todos": "Справи",
+  "header_wheel_of_life": "Колесо життя",
+  "header_profile": "Профіль",
   "register": "Зареєструватися",
   "login": "Увійти",
   "placeholder_name": "Введіть ім'я",
@@ -54,5 +56,6 @@
   "3_years": "Три роки",
   "5_years": "П'ять років",
   "page": "Сторінки(ок)",
-  "archive": "В архіві"
+  "archive": "В архіві",
+  "helmet_profile": "Ваш профіль"
 }

@@ -1,6 +1,8 @@
 {
   "header_home": "Home",
   "header_todos": "Todos",
+  "header_wheel_of_life": "Wheel Of Life",
+  "header_profile": "Profile",
   "register": "Register",
   "login": "Log In",
   "placeholder_name": "Enter name",
@@ -54,5 +56,6 @@
   "3_years": "Three years",
   "5_years": "Five years",
   "page": "Pages",
-  "archive": "Archived"
+  "archive": "Archived",
+  "helmet_profile": "Your profile"
 }

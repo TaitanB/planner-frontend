@@ -6,8 +6,10 @@ import { useTranslation } from 'react-i18next';
 import TodosList from 'components/TodosList/TodosList';
 import AddTodosForm from 'components/TodosForm/AddTodosForm';
 import TodosFilter from '../../components/TodosFilter/TodosFilter';
+import TodosStatistics from '../../components/TodosStatistics/TodosStatistics';
 import GetPagination from '../../components/GetPagination/GetPagination';
 import { fetchAllTodos } from 'redux/todos/operations';
+
 import {
   Filtered,
   getPage,
@@ -41,7 +43,10 @@ export default function Todos() {
       <div className="d-flex flex-column min-vh-100">
         <AddTodosForm />
         <h1 className="mb-3 pt-5 text-center">{t('title_list_todo')}</h1>
-        <TodosFilter filter={query} page={page} />
+        <div className="d-flex flex-wrap">
+          <TodosFilter filter={query} page={page} />
+          <TodosStatistics />
+        </div>
         <TodosList />
         <GetPagination
           page={page}

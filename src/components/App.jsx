@@ -17,6 +17,8 @@ const HomePage = lazy(() => import('../pages/Home/Home'));
 const RegisterPage = lazy(() => import('../pages/Register/Register'));
 const LoginPage = lazy(() => import('../pages/Login/Login'));
 const TodosPage = lazy(() => import('../pages/Todos/Todos'));
+const ProfilePage = lazy(() => import('../pages/Profile/Profile'));
+const WheelOfLifePage = lazy(() => import('../pages/WheelOfLife/WheelOfLife'));
 const NotFoundPage = lazy(() => import('../pages/NotFound/NotFound'));
 
 export const App = () => {
@@ -55,6 +57,21 @@ export const App = () => {
             path="/todos"
             element={
               <PrivateRoute redirectTo="/login" component={<TodosPage />} />
+            }
+          />
+          <Route
+            path="/wheelOfLife"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<WheelOfLifePage />}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ProfilePage />} />
             }
           />
           <Route path="*" element={<NotFoundPage />} />
