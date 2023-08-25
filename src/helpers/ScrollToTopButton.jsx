@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FaArrowUp } from 'react-icons/fa';
 
-const ScrollToTopButton = () => {
+const ScrollToTopButton = ({ isAccordionOpen }) => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -12,8 +12,10 @@ const ScrollToTopButton = () => {
 
   return (
     <Button
-      variant="primary"
-      className="position-absolute bottom-0 end-0 scroll-to-top-button"
+      variant="outline-primary"
+      className={`position-absolute bottom-0 end-0 scroll-to-top-button me-3 ${
+        isAccordionOpen ? 'visible' : 'invisible'
+      }`}
       onClick={scrollToTop}
     >
       <FaArrowUp className="scroll-to-top-icon" />

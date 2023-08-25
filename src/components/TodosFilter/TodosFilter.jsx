@@ -1,28 +1,36 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Form, CloseButton } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Form, CloseButton, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import { getFilter, clearFilter } from '../../redux/todos/todosSlice';
-import { Filtered } from '../../redux/todos/selectors';
+// import { Filtered } from '../../redux/todos/selectors';
 
 import propTypes from 'prop-types';
 
-const TodosFilter = ({ filter }) => {
-  const filterValue = useSelector(Filtered);
-
+const TodosFilter = () => {
+  // const query = useSelector(Filtered);
+  const [searchValue, setSearchValue] = useState('');
   const { t } = useTranslation();
-
+  // console.log(query);
+  // console.log(filter);
   const dispatch = useDispatch();
 
-  const handleChangeFilter = event => {
-    const { value } = event.currentTarget;
-    dispatch(getFilter(value));
+  // const handleChangeFilter = event => {
+  //   const { value } = event.currentTarget;
+  //   return value;
+  // dispatch(getFilter(value));
+  // };
+
+  const handleSearch = () => {
+    console.log(searchValue);
+    dispatch(getFilter(searchValue));
   };
 
   const handleClearFilter = event => {
     event.target.blur();
     dispatch(clearFilter());
+    setSearchValue('');
   };
 
   return (
@@ -30,13 +38,16 @@ const TodosFilter = ({ filter }) => {
       <Form.Label className="mb-0 d-flex align-items-center">
         <Form.Control
           type="text"
-          name={filter}
-          value={filterValue}
-          onChange={handleChangeFilter}
+          name={searchValue}
+          value={searchValue}
+          onChange={event => setSearchValue(event.target.value)}
           placeholder={t('placeholder_search')}
           className="me-2"
           aria-label="Search"
         />
+        <Button onClick={handleSearch} variant="outline-primary me-2">
+          {t('placeholder_search')}
+        </Button>
         <CloseButton onClick={handleClearFilter} />
       </Form.Label>
     </Form>

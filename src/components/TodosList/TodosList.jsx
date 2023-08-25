@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Accordion, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,14 @@ const TodosList = () => {
   const filteredTodos = useSelector(getFilteredTodos);
 
   const { t } = useTranslation();
+
+  useEffect(
+    isAccordionOpen => {
+      !isAccordionOpen && setIsAccordionOpen(false);
+      setActiveAccordionKey([]);
+    },
+    [filteredTodos]
+  );
 
   const handleToggleAccordion = () => {
     if (!isAccordionOpen && activeAccordionKey.length > 0) {
@@ -55,6 +63,7 @@ const TodosList = () => {
   return (
     <div className="mb-3 pb-5 position-relative">
       <Button
+        variant="outline-primary"
         onClick={handleToggleAccordion}
         className="position-absolute bottom-0 start-0"
       >
@@ -62,7 +71,7 @@ const TodosList = () => {
           ? `${t('is_accordion_close')}`
           : `${t('is_accordion_open')}`}
       </Button>
-      <ScrollToTopButton />
+      <ScrollToTopButton isAccordionOpen={isAccordionOpen} />
       {filteredTodos.length !== 0 ? (
         <Accordion
           alwaysOpen
