@@ -8,7 +8,7 @@ const AppBar = lazy(() => import('../AppBar/AppBar'));
 
 const Layout = () => {
   return (
-    <Container className="d-flex flex-column py-5 mt-5 ">
+    <Container className="d-flex flex-column min-vh-100">
       <Suspense fallback={<Loader />}>
         <AppBar />
         <Outlet />

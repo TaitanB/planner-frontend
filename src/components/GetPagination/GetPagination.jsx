@@ -69,7 +69,7 @@ export default function GetPagination({ page, totalPages, handlePageChange }) {
   return (
     <>
       {totalPages > 1 && (
-        <Pagination className="mx-auto">
+        <Pagination className="mx-auto mb-5">
           <Pagination.First
             onClick={() => handlePageChange(1)}
             disabled={isFirstPage}

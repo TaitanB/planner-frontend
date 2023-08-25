@@ -57,5 +57,7 @@
   "5_years": "П'ять років",
   "page": "Сторінки(ок)",
   "archive": "В архіві",
-  "helmet_profile": "Ваш профіль"
+  "helmet_profile": "Ваш профіль",
+  "is_accordion_open": "Відкрити все",
+  "is_accordion_close": "Закрити все"
 }

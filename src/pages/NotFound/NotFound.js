@@ -15,7 +15,7 @@ const NotFound = () => {
         <Helmet>
           <title>{t('helmet_not_found_page')}</title>
         </Helmet>
-        <p>
+        <p className=" mt-5 pt-5">
           {t('not_found_page_text')} <Link to="/">{t('header_home')}</Link>!
         </p>
       </HelmetProvider>

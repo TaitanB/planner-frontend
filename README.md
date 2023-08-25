@@ -2,8 +2,6 @@
 
 <p><b>Wheel Of Life Planner</b></p>
 
-![home](./assets/home.jpg)
-
 <h2>This project was created using:</h2>
 <ul>
 <li>HTML</li>

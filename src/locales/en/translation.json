@@ -57,5 +57,7 @@
   "5_years": "Five years",
   "page": "Pages",
   "archive": "Archived",
-  "helmet_profile": "Your profile"
+  "helmet_profile": "Your profile",
+  "is_accordion_open": "Open all",
+  "is_accordion_close": "Close all"
 }

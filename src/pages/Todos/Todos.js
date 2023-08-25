@@ -40,7 +40,7 @@ export default function Todos() {
       <Helmet>
         <title>{t('helmet_title_todos_page')}</title>
       </Helmet>
-      <div className="d-flex flex-column min-vh-100">
+      <div className="d-flex flex-column mt-5 pt-5">
         <AddTodosForm />
         <h1 className="mb-3 pt-5 text-center">{t('title_list_todo')}</h1>
         <div className="d-flex flex-wrap">

@@ -10,7 +10,7 @@ export default function Register() {
       <Helmet>
         <title>{t('register')}</title>
       </Helmet>
-      <div className="d-flex flex-column mt-5">
+      <div className="d-flex flex-column  mt-5 pt-5">
         <h2 className="text-uppercase mb-2 mx-auto">{t('register')}</h2>
         <RegisterForm />
       </div>

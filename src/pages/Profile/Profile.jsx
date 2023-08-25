@@ -5,7 +5,7 @@ const Profile = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <div className=" mt-5 pt-5">
       <HelmetProvider>
         <Helmet>
           <title>{t('helmet_profile')}</title>

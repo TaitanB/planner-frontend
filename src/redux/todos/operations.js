@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'http://localhost:3001';
+import { BASE_URL } from '../../constants/constants';
+axios.defaults.baseURL = BASE_URL;
 
 export const fetchAllTodos = createAsyncThunk(
   'todo/fetchAll',
@@ -36,6 +37,8 @@ export const fetchAllTodos = createAsyncThunk(
 export const fetchAddTodo = createAsyncThunk(
   'todo/addTodo',
   async (data, { rejectWithValue }) => {
+    console.log(data);
+
     try {
       const response = await axios.post('/api/todos', data);
 

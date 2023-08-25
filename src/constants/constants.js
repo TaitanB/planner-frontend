@@ -7,3 +7,5 @@ export const Periods = [
   '3_years',
   '5_years',
 ];
+
+export const BASE_URL = 'http://localhost:3001';

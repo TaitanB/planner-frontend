@@ -2,7 +2,7 @@ import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import MyDatePicker from '../../utils/MyDatePicker';
-import { Periods } from '../../constants/Periods';
+import { Periods } from '../../constants/constants';
 import { getPlannedDate } from '../../helpers/getPlannedDate';
 
 export default function PeriodsDate({
@@ -12,6 +12,8 @@ export default function PeriodsDate({
   setSelectedPeriod,
 }) {
   const { t } = useTranslation();
+
+  // console.log(plannedDate);
 
   return (
     <div className="d-flex flex-wrap gap-3 align-items-center">

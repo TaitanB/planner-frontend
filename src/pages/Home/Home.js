@@ -23,7 +23,7 @@ export default function Home() {
           backgroundPosition: 'center',
           backgroundSize: 'contain',
         }}
-        className="d-flex flex-column mt-2"
+        className="d-flex flex-column  mt-5 pt-5"
       >
         <h1 className="mb-2 mx-auto">{t('title_home_page')}</h1>
         {isLoggedIn ? (

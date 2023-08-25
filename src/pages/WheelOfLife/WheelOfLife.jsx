@@ -5,7 +5,7 @@ const WheelOfLife = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <div className=" mt-5 pt-5">
       <HelmetProvider>
         <Helmet>
           <title>{t('header_wheel_of_life')}</title>

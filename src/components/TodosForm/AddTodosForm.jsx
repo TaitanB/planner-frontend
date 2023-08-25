@@ -13,6 +13,8 @@ export default function AddTodosForm() {
   const [plannedDate, setPlannedDate] = useState('');
   const [selectedPeriod, setSelectedPeriod] = useState('');
 
+  // console.log(selectedPeriod, plannedDate);
+
   const [activeAccordionKey, setActiveAccordionKey] = useState(null);
 
   const { t } = useTranslation();
@@ -38,7 +40,7 @@ export default function AddTodosForm() {
 
   const handleSubmit = event => {
     event.preventDefault();
-
+    console.log(plannedDate);
     dispatch(fetchAddTodo({ title, description, plannedDate }));
     toast.success(`${t('todo_added')}`);
     reset();
