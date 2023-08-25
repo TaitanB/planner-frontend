@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/planner-frontend/static/css/main.c38abd27.css",
-    "main.js": "/planner-frontend/static/js/main.2c31a3ae.js",
+    "main.js": "/planner-frontend/static/js/main.7f020135.js",
     "static/js/852.f4605d99.chunk.js": "/planner-frontend/static/js/852.f4605d99.chunk.js",
     "static/js/16.bd39dd3d.chunk.js": "/planner-frontend/static/js/16.bd39dd3d.chunk.js",
     "static/js/617.dbeac816.chunk.js": "/planner-frontend/static/js/617.dbeac816.chunk.js",
-    "static/js/804.ffed0447.chunk.js": "/planner-frontend/static/js/804.ffed0447.chunk.js",
+    "static/js/804.296d2fca.chunk.js": "/planner-frontend/static/js/804.296d2fca.chunk.js",
     "static/js/409.e1da31de.chunk.js": "/planner-frontend/static/js/409.e1da31de.chunk.js",
     "static/js/951.aa341cd1.chunk.js": "/planner-frontend/static/js/951.aa341cd1.chunk.js",
     "static/js/697.9644a389.chunk.js": "/planner-frontend/static/js/697.9644a389.chunk.js",
@@ -21,11 +21,11 @@
     "index.html": "/planner-frontend/index.html",
     "static/media/getFetch.cjs": "/planner-frontend/static/media/getFetch.40f37ddea2378391108f.cjs",
     "main.c38abd27.css.map": "/planner-frontend/static/css/main.c38abd27.css.map",
-    "main.2c31a3ae.js.map": "/planner-frontend/static/js/main.2c31a3ae.js.map",
+    "main.7f020135.js.map": "/planner-frontend/static/js/main.7f020135.js.map",
     "852.f4605d99.chunk.js.map": "/planner-frontend/static/js/852.f4605d99.chunk.js.map",
     "16.bd39dd3d.chunk.js.map": "/planner-frontend/static/js/16.bd39dd3d.chunk.js.map",
     "617.dbeac816.chunk.js.map": "/planner-frontend/static/js/617.dbeac816.chunk.js.map",
-    "804.ffed0447.chunk.js.map": "/planner-frontend/static/js/804.ffed0447.chunk.js.map",
+    "804.296d2fca.chunk.js.map": "/planner-frontend/static/js/804.296d2fca.chunk.js.map",
     "409.e1da31de.chunk.js.map": "/planner-frontend/static/js/409.e1da31de.chunk.js.map",
     "951.aa341cd1.chunk.js.map": "/planner-frontend/static/js/951.aa341cd1.chunk.js.map",
     "697.9644a389.chunk.js.map": "/planner-frontend/static/js/697.9644a389.chunk.js.map",
@@ -39,6 +39,6 @@
   },
   "entrypoints": [
     "static/css/main.c38abd27.css",
-    "static/js/main.2c31a3ae.js"
+    "static/js/main.7f020135.js"
   ]
 }
