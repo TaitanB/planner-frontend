@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+
 import { Navbar, Nav } from 'react-bootstrap';
 
-import { ThemeSwitch } from '../../helpers/ThemeSwitch';
-import LangBtn from '../../helpers/LangBtn';
 import { Navigation } from '../Navigation/Navigation';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthNav } from '../AuthNav/AuthNav';
 import { useAuth } from '../../hooks/useAuth';
-
+import { ThemeSwitch } from '../../helpers/ThemeSwitch';
+import LangBtn from '../../helpers/LangBtn';
 import logo from '../../image/logo192.png';
 
 const AppBar = () => {
@@ -37,7 +37,7 @@ const AppBar = () => {
         onToggle={handleMenuToggle}
       >
         <Navbar.Brand className="me-0">
-          <img src={logo} alt="Wheel Of Life" style={{ width: '36px' }} />
+          <img src={logo} alt="Wheel Of Life" width={36} />
         </Navbar.Brand>
         <LangBtn />
         <ThemeSwitch />

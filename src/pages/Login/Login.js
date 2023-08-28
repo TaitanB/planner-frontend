@@ -1,6 +1,7 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { LoginForm } from 'components/LoginForm/LoginForm';
 import { useTranslation } from 'react-i18next';
+
+import { LoginForm } from 'components/LoginForm/LoginForm';
 
 export default function Login() {
   const { t } = useTranslation();

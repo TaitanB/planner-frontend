@@ -8,4 +8,5 @@ export const Periods = [
   '5_years',
 ];
 
-export const BASE_URL = 'http://localhost:3001';
+// export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://planner-backend-se10.onrender.com';

@@ -62,21 +62,26 @@ const TodosList = () => {
 
   return (
     <div className="mb-3 pb-5 position-relative">
-      <Button
-        variant="outline-primary"
-        onClick={handleToggleAccordion}
-        className="position-absolute bottom-0 start-0"
-      >
-        {isAccordionOpen
-          ? `${t('is_accordion_close')}`
-          : `${t('is_accordion_open')}`}
-      </Button>
+      {filteredTodos.length > 0 && (
+        <Button
+          variant="outline-primary"
+          onClick={handleToggleAccordion}
+          className="position-absolute bottom-0 start-0"
+        >
+          {isAccordionOpen
+            ? `${t('is_accordion_close')}`
+            : `${t('is_accordion_open')}`}
+        </Button>
+      )}
+
       <ScrollToTopButton isAccordionOpen={isAccordionOpen} />
       {filteredTodos.length !== 0 ? (
         <Accordion
+          flush
           alwaysOpen
           activeKey={activeAccordionKey}
           onSelect={handleAccordionSelect}
+          className="border"
         >
           {filteredTodos.map(
             ({
@@ -88,6 +93,7 @@ const TodosList = () => {
               plannedDate,
               completedDate,
               overdueDate,
+              archiveDate,
             }) => {
               return (
                 <TodosItem
@@ -100,6 +106,7 @@ const TodosList = () => {
                   plannedDate={plannedDate}
                   completedDate={completedDate}
                   overdueDate={overdueDate}
+                  archiveDate={archiveDate}
                 />
               );
             }

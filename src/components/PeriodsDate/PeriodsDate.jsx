@@ -13,8 +13,6 @@ export default function PeriodsDate({
 }) {
   const { t } = useTranslation();
 
-  // console.log(plannedDate);
-
   return (
     <div className="d-flex flex-wrap gap-3 align-items-center">
       {Periods.map(text => (

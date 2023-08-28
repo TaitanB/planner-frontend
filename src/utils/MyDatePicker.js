@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
+
+import { MdCalendarMonth } from 'react-icons/md';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { MdCalendarMonth } from 'react-icons/md';
 
 function MyDatePicker({ selectedPeriod, setPlannedDate }) {
   const [selectedDate, setSelectedDate] = useState(null);
-
-  // console.log(selectedPeriod, selectedDate);
 
   useEffect(() => {
     selectedPeriod !== 'date' && setSelectedDate(null);

@@ -6,6 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 
 export const Navigation = ({ showMenu, setShowMenu }) => {
   const { isLoggedIn } = useAuth();
+
   const { t } = useTranslation();
 
   const handleClick = event => {

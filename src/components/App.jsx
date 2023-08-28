@@ -7,7 +7,6 @@ import { RestrictedRoute } from '../utils/RestrictedRoute';
 import { LanguageProvider } from 'utils/LanguageContext';
 import { refreshUser } from 'redux/auth/authOperations';
 import { useAuth } from '../hooks/useAuth';
-
 import { Loader } from './Loader/Loader';
 
 import './bootstrap.css';
@@ -20,6 +19,10 @@ const TodosPage = lazy(() => import('../pages/Todos/Todos'));
 const ProfilePage = lazy(() => import('../pages/Profile/Profile'));
 const WheelOfLifePage = lazy(() => import('../pages/WheelOfLife/WheelOfLife'));
 const NotFoundPage = lazy(() => import('../pages/NotFound/NotFound'));
+const AllTodos = lazy(() => import('../components/AllTodos/AllTodos'));
+const Completed = lazy(() => import('../components/Completed/Completed'));
+const Overdue = lazy(() => import('../components/Overdue/Overdue'));
+const Archive = lazy(() => import('../components/Archive/Archive'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -58,7 +61,12 @@ export const App = () => {
             element={
               <PrivateRoute redirectTo="/login" component={<TodosPage />} />
             }
-          />
+          >
+            <Route index element={<AllTodos />} />
+            <Route path="completed" element={<Completed />} />
+            <Route path="overdue" element={<Overdue />} />
+            <Route path="archive" element={<Archive />} />
+          </Route>
           <Route
             path="/wheelOfLife"
             element={

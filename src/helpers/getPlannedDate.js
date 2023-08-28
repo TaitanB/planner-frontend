@@ -2,8 +2,6 @@ export const getPlannedDate = ({ text, plannedDate }) => {
   const currentDate = new Date();
   let date;
 
-  // console.log(plannedDate);
-
   switch (text) {
     case 'week':
       date = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);

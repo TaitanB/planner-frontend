@@ -1,8 +1,9 @@
-import { useAuth } from '../../hooks/useAuth';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import bg from '../../image/bg.png';
 import { Link } from 'react-router-dom';
+
+import { useAuth } from '../../hooks/useAuth';
+import bg from '../../image/bg.png';
 
 export default function Home() {
   const { isLoggedIn } = useAuth();

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import Pagination from 'react-bootstrap/Pagination';
 
 export default function GetPagination({ page, totalPages, handlePageChange }) {

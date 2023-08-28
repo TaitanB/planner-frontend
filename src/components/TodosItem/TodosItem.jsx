@@ -1,21 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { MdOutlineDeleteForever, MdBorderColor } from 'react-icons/md';
 import { BsDatabaseCheck } from 'react-icons/bs';
+import {
+  Accordion,
+  Button,
+  Form,
+  Tooltip,
+  OverlayTrigger,
+} from 'react-bootstrap';
 
-// import propTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 import {
   fetchDeleteTodo,
   fetchUpdateTodo,
   fetchCompletedToggle,
 } from '../../redux/todos/operations';
-import { getDate } from '../../helpers/getDate';
-
-import { Accordion, Button, Form } from 'react-bootstrap';
 import UpdateTodosForm from 'components/TodosForm/UpdateTodosForm';
+import useTooltipVisibility from '../../hooks/useTooltipVisibility';
+import { getDate } from '../../helpers/getDate';
 
 const TodosItem = ({
   _id,
@@ -26,11 +33,10 @@ const TodosItem = ({
   plannedDate,
   completedDate,
   overdueDate,
+  archiveDate,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [descriptionUpdate, setDescriptionUpdate] = useState(description);
-
-  const selectedLanguage = localStorage.getItem('selectedLanguage');
 
   const dispatch = useDispatch();
 
@@ -38,15 +44,9 @@ const TodosItem = ({
 
   const isCompleted = completedDate !== null;
   const isOverdue = overdueDate !== null;
+  const isArchive = archiveDate !== null;
 
-  useEffect(() => {
-    const tooltips = Array.from(
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    );
-    tooltips.forEach(tooltip => {
-      new window.bootstrap.Tooltip(tooltip);
-    });
-  }, [selectedLanguage]);
+  const isTooltipVisible = useTooltipVisibility();
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -100,65 +100,79 @@ const TodosItem = ({
     <Accordion.Item eventKey={_id}>
       <div className="d-flex gap-3 align-items-center px-3">
         {!isOverdue && (
-          <Form.Check
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-title={`${t('is_completed')}`}
-            aria-label="option 1"
-            id={`toggle-check-${_id}`}
-            type="checkbox"
-            variant="outline-primary"
-            checked={isCompleted}
-            disabled={isEditing === true}
-            value="1"
-            onChange={e => handleToggle(e, _id)}
-          />
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip>{t('is_completed')}</Tooltip>}
+          >
+            <Form.Check
+              aria-label="option 1"
+              id={`toggle-check-${_id}`}
+              type="checkbox"
+              variant="outline-primary"
+              checked={isCompleted}
+              disabled={isEditing === true}
+              value="1"
+              onChange={e => handleToggle(e, _id)}
+            />
+          </OverlayTrigger>
         )}
         {isOverdue && (
-          <Form.Check
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-title={`${t('is_overdue')}`}
-            isInvalid
-            defaultChecked
-            type="radio"
-            id={`toggle-check-${_id}`}
-          />
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip>{t('is_overdue')}</Tooltip>}
+          >
+            <Form.Check
+              isInvalid
+              defaultChecked
+              type="radio"
+              id={`toggle-check-${_id}`}
+            />
+          </OverlayTrigger>
         )}
         <Accordion.Header className="w-100">
-          <h5
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-title={title}
-            className="w-100 mb-0 text-truncate custom-accordion-header"
-          >
-            {title}
-          </h5>
+          {isTooltipVisible ? (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>{title}</Tooltip>}
+            >
+              <h5 className="w-100 mb-0 text-truncate custom-accordion-header">
+                {title}
+              </h5>
+            </OverlayTrigger>
+          ) : (
+            <h5 className="w-100 mb-0 text-truncate custom-accordion-header">
+              {title}
+            </h5>
+          )}
         </Accordion.Header>
         {isCompleted || isOverdue ? (
-          <Button
-            key={`archive-${_id}`}
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-title={`${t('add_to_archive')}`}
-            className="ms-auto btn btn-success"
-            type="button"
-            // onClick={() => toArchiveTodo(_id)}
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip>{`${t('add_to_archive')}`}</Tooltip>}
           >
-            <BsDatabaseCheck />
-          </Button>
+            <Button
+              key={`archive-${_id}`}
+              className="ms-auto btn btn-success"
+              type="button"
+              // onClick={() => toArchiveTodo(_id)}
+            >
+              <BsDatabaseCheck />
+            </Button>
+          </OverlayTrigger>
         ) : (
-          <Button
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-title={`${t('delete')}`}
-            disabled={isEditing}
-            className="ms-auto btn btn-danger"
-            type="button"
-            onClick={() => deleteTodo(_id)}
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip>{`${t('delete')}`}</Tooltip>}
           >
-            <MdOutlineDeleteForever />
-          </Button>
+            <Button
+              disabled={isEditing}
+              className="ms-auto btn btn-danger"
+              type="button"
+              onClick={() => deleteTodo(_id)}
+            >
+              <MdOutlineDeleteForever />
+            </Button>
+          </OverlayTrigger>
         )}
       </div>
       <Accordion.Body className="p-3" onExited={() => setIsEditing(false)}>
@@ -187,15 +201,24 @@ const TodosItem = ({
                   {t('is_overdue')}: <b>{getDate(overdueDate)}</b>
                 </div>
               )}
-              <Button
-                data-bs-title={`${t('edit')}`}
-                disabled={isCompleted || isOverdue}
-                className="ms-auto btn btn-primary"
-                type="button"
-                onClick={() => setIsEditing(true)}
+              {isArchive && (
+                <div className="text-warning">
+                  {t('archive')}: <b>{getDate(archiveDate)}</b>
+                </div>
+              )}
+              <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip>{`${t('edit')}`}</Tooltip>}
               >
-                <MdBorderColor />
-              </Button>
+                <Button
+                  disabled={isCompleted || isOverdue}
+                  className="ms-auto btn btn-primary"
+                  type="button"
+                  onClick={() => setIsEditing(true)}
+                >
+                  <MdBorderColor />
+                </Button>
+              </OverlayTrigger>
             </div>
           </>
         ) : (
@@ -212,13 +235,14 @@ const TodosItem = ({
   );
 };
 
-// TodosItem.propTypes = {
-//   _id: propTypes.string.isRequired,
-//   title: propTypes.string.isRequired,
-//   description: propTypes.string.isRequired,
-//   createdAt: propTypes.string.isRequired,
-//   updatedAt: propTypes.string.isRequired,
-//   completedDate: propTypes.string,
-// };
-
+TodosItem.propTypes = {
+  _id: propTypes.string.isRequired,
+  title: propTypes.string.isRequired,
+  description: propTypes.string.isRequired,
+  createdAt: propTypes.string.isRequired,
+  updatedAt: propTypes.string.isRequired,
+  completedDate: propTypes.string,
+  overdueDate: propTypes.string,
+  archiveDate: propTypes.string,
+};
 export default TodosItem;

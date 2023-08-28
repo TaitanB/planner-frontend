@@ -1,15 +1,16 @@
-import { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { Outlet } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 
-import TodosList from 'components/TodosList/TodosList';
 import AddTodosForm from 'components/TodosForm/AddTodosForm';
 import TodosFilter from '../../components/TodosFilter/TodosFilter';
 import TodosStatistics from '../../components/TodosStatistics/TodosStatistics';
 import GetPagination from '../../components/GetPagination/GetPagination';
 import { fetchAllTodos } from 'redux/todos/operations';
-
+import { Loader } from 'components/Loader/Loader';
 import {
   Filtered,
   getPage,
@@ -42,12 +43,13 @@ export default function Todos() {
       </Helmet>
       <div className="d-flex flex-column mt-5 pt-5">
         <AddTodosForm />
-        <h1 className="mb-3 pt-5 text-center">{t('title_list_todo')}</h1>
-        <div className="d-flex flex-wrap">
+        <div className="d-flex flex-wrap gap-3 align-items-end">
           <TodosFilter filter={query} page={page} />
           <TodosStatistics />
         </div>
-        <TodosList />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
         <GetPagination
           page={page}
           totalPages={totalPages}

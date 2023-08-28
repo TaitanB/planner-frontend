@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { Accordion, Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
@@ -12,9 +13,6 @@ export default function AddTodosForm() {
   const [description, setDescription] = useState('');
   const [plannedDate, setPlannedDate] = useState('');
   const [selectedPeriod, setSelectedPeriod] = useState('');
-
-  // console.log(selectedPeriod, plannedDate);
-
   const [activeAccordionKey, setActiveAccordionKey] = useState(null);
 
   const { t } = useTranslation();
@@ -65,7 +63,11 @@ export default function AddTodosForm() {
   };
 
   return (
-    <Accordion activeKey={activeAccordionKey} onSelect={handleAccordionSelect}>
+    <Accordion
+      activeKey={activeAccordionKey}
+      onSelect={handleAccordionSelect}
+      className="mb-5"
+    >
       <Accordion.Item eventKey="0">
         <Accordion.Header>
           <h3 className="mb-0 ms-auto ">{t('form_add_todo_title')}</h3>
