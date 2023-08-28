@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkplanner_frontend=self.webpackChunkplanner_frontend||[]).push([[409],{1409:function(e,n,r){r.r(n);var l=r(6907),t=r(9230),s=r(3329);n.default=function(){var e=(0,t.$G)().t;return(0,s.jsx)("div",{className:" mt-5 pt-5",children:(0,s.jsxs)(l.B6,{children:[(0,s.jsx)(l.ql,{children:(0,s.jsx)("title",{children:e("helmet_profile")})}),(0,s.jsx)("h1",{children:e("header_profile")})]})})}}}]);
-//# sourceMappingURL=409.e1da31de.chunk.js.map
