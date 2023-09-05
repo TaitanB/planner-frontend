@@ -5,7 +5,7 @@ import { PiEyeClosedBold, PiEyeBold } from 'react-icons/pi';
 function PasswordToggle({ showPassword, togglePassword }) {
   return (
     <Button
-      className="input-group-append border-light-subtle"
+      className="input-group-append border-light-subtle rounded-end"
       type="button"
       variant="outline-secondary"
       onClick={togglePassword}

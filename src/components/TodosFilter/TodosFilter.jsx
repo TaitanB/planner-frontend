@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { Form, CloseButton, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-
+import { MdSearch } from 'react-icons/md';
 import { getFilter, clearFilter } from '../../redux/todos/todosSlice';
 
 const TodosFilter = () => {
@@ -36,8 +36,8 @@ const TodosFilter = () => {
           className="me-2"
           aria-label="Search"
         />
-        <Button onClick={handleSearch} variant="outline-primary me-2">
-          {t('placeholder_search')}
+        <Button onClick={handleSearch} variant="link  me-2 p-0">
+          <MdSearch style={{ width: '32px', height: '32px' }} />
         </Button>
         <CloseButton onClick={handleClearFilter} />
       </Form.Label>

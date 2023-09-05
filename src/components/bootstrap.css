@@ -65,6 +65,10 @@
   margin-top: 7px;
 }
 
+.react-datepicker-popper {
+  z-index: 1050 !important;
+}
+
 /* .bg-currentDate {
   background-color: rgb(13, 110, 253);
   /* color: rgb(255, 255, 255); */
