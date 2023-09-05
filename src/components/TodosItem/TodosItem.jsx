@@ -21,7 +21,7 @@ import {
   fetchCompletedToggle,
 } from '../../redux/todos/operations';
 import UpdateTodosForm from 'components/TodosForm/UpdateTodosForm';
-import useTooltipVisibility from '../../hooks/useTooltipVisibility';
+import useMobileStyle from '../../hooks/useMobileStyle';
 import { getDate } from '../../helpers/getDate';
 
 const TodosItem = ({
@@ -46,7 +46,7 @@ const TodosItem = ({
   const isOverdue = overdueDate !== null;
   const isArchive = archiveDate !== null;
 
-  const isTooltipVisible = useTooltipVisibility();
+  const isMobileStyle = useMobileStyle();
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -130,7 +130,7 @@ const TodosItem = ({
           </OverlayTrigger>
         )}
         <Accordion.Header className="w-100">
-          {isTooltipVisible ? (
+          {isMobileStyle ? (
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip>{title}</Tooltip>}

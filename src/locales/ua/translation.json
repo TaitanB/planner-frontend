@@ -62,5 +62,6 @@
   "is_accordion_close": "Закрити все",
   "todos_completed": "Ваші Виконані справи",
   "todos_overdue": "Ваші Прострочені справи",
-  "todos_archive": "Ваші Справи додані в архів"
+  "todos_archive": "Ваші Справи додані в архів",
+  "select_date": "Вибрати дату"
 }

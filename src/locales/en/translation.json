@@ -62,5 +62,6 @@
   "is_accordion_close": "Close all",
   "todos_completed": "Your Completed todos",
   "todos_overdue": "Your Overdue todos",
-  "todos_archive": "Your Archived todos"
+  "todos_archive": "Your Archived todos",
+  "select_date": "Select a date"
 }

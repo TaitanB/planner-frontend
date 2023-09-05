@@ -6,7 +6,7 @@ import { Nav, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import { getTotalTodos } from '../../redux/todos/selectors';
-import useTooltipVisibility from '../../hooks/useTooltipVisibility';
+import useMobileStyle from '../../hooks/useMobileStyle';
 
 const TodosStatistics = () => {
   const totalTodos = useSelector(getTotalTodos);
@@ -19,7 +19,7 @@ const TodosStatistics = () => {
     event.target.blur();
   };
 
-  const isTooltipVisible = useTooltipVisibility();
+  const isMobileStyle = useMobileStyle();
 
   return (
     <Nav
@@ -34,7 +34,7 @@ const TodosStatistics = () => {
         to="/todos"
         onClick={handleClick}
       >
-        {isTooltipVisible ? (
+        {isMobileStyle ? (
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>{`${t('all_todos')}`}</Tooltip>}
@@ -54,7 +54,7 @@ const TodosStatistics = () => {
         to="completed"
         onClick={handleClick}
       >
-        {isTooltipVisible ? (
+        {isMobileStyle ? (
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>{`${t('completed')}`}</Tooltip>}
@@ -73,7 +73,7 @@ const TodosStatistics = () => {
         to="overdue"
         onClick={handleClick}
       >
-        {isTooltipVisible ? (
+        {isMobileStyle ? (
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>{`${t('is_overdue')}`}</Tooltip>}
@@ -92,7 +92,7 @@ const TodosStatistics = () => {
         to="archive"
         onClick={handleClick}
       >
-        {isTooltipVisible ? (
+        {isMobileStyle ? (
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>{`${t('archive')}`}</Tooltip>}

@@ -49,3 +49,31 @@
 .nav-link {
   min-width: 0;
 }
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  display: none;
+}
+
+.react-datepicker__header__dropdown.react-datepicker__header__dropdown--select {
+  margin: 5px;
+}
+
+.react-datepicker__navigation.react-datepicker__navigation--next,
+.react-datepicker__navigation.react-datepicker__navigation--previous {
+  margin-top: 7px;
+}
+
+/* .bg-currentDate {
+  background-color: rgb(13, 110, 253);
+  /* color: rgb(255, 255, 255); */
+/* } */
+
+/* .bg-currentDate:hover,
+.bg-currentDate:focus,
+.bg-currentMonth:hover,
+.bg-currentMonth:focus {
+  background-color: #6edff6;
+  color: #212121;
+}  */

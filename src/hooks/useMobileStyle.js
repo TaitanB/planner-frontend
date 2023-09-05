@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 
-function useTooltipVisibility() {
-  const [isTooltipVisible, setTooltipVisible] = useState(false);
+function useMobileStyle() {
+  const [isMobileStyle, setMobileStyle] = useState(false);
 
   useEffect(() => {
     const resizeScreen = () => {
-      setTooltipVisible(window.innerWidth <= 576);
+      setMobileStyle(window.innerWidth <= 576);
     };
 
     resizeScreen();
@@ -16,7 +16,7 @@ function useTooltipVisibility() {
     };
   }, []);
 
-  return isTooltipVisible;
+  return isMobileStyle;
 }
 
-export default useTooltipVisibility;
+export default useMobileStyle;
