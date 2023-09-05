@@ -1,11 +1,20 @@
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import { register } from 'redux/auth/authOperations';
+import PasswordToggle from '../../utils/PasswordToggle';
 
 export const RegisterForm = () => {
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -47,11 +56,19 @@ export const RegisterForm = () => {
       </Form.Group>
       <Form.Group controlId="formBasicPassword" className="mb-4">
         <Form.Label>{t('password')}:</Form.Label>
-        <Form.Control
-          type="Password"
-          name="password"
-          placeholder={t('placeholder_password')}
-        />
+        <div className="input-group">
+          <Form.Control
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            value={password}
+            placeholder={t('placeholder_password')}
+            onChange={e => setPassword(e.target.value)}
+          />
+          <PasswordToggle
+            showPassword={showPassword}
+            togglePassword={handleTogglePassword}
+          />
+        </div>
       </Form.Group>
       <Button type="submit" className="m-2" variant="primary">
         {t('register')}

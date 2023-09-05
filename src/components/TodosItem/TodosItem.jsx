@@ -22,7 +22,7 @@ import {
 } from '../../redux/todos/operations';
 import UpdateTodosForm from 'components/TodosForm/UpdateTodosForm';
 import useMobileStyle from '../../hooks/useMobileStyle';
-import { getDate } from '../../helpers/getDate';
+import useLocalDate from '../../hooks/useLocalDate';
 
 const TodosItem = ({
   _id,
@@ -47,6 +47,13 @@ const TodosItem = ({
   const isArchive = archiveDate !== null;
 
   const isMobileStyle = useMobileStyle();
+
+  const localCreatedAt = useLocalDate(createdAt);
+  const localUpdatedAt = useLocalDate(updatedAt);
+  const localPlannedDate = useLocalDate(plannedDate);
+  const localCompletedDate = useLocalDate(completedDate);
+  const localOverdueDate = useLocalDate(overdueDate);
+  const localArchiveDate = useLocalDate(archiveDate);
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -182,28 +189,28 @@ const TodosItem = ({
 
             <div className="d-flex flex-wrap gap-3 align-items-center">
               <div>
-                {t('created')}: <b>{getDate(createdAt)}</b>
+                {t('created')}: <b>{localCreatedAt}</b>
               </div>
               <div>
-                {t('updated')}: <b> {getDate(updatedAt)}</b>
+                {t('updated')}: <b> {localUpdatedAt}</b>
               </div>
               <div>
-                {t('planned_date')}: <b> {getDate(plannedDate)}</b>
+                {t('planned_date')}: <b> {localPlannedDate}</b>
               </div>
               {overdueDate === null && (
                 <div className={isCompleted ? 'text-success' : ''}>
                   {t('completed')}:
-                  <b> {isCompleted ? getDate(completedDate) : '??.??.????'}</b>
+                  <b> {isCompleted ? localCompletedDate : '??.??.????'}</b>
                 </div>
               )}
               {isOverdue && (
                 <div className="text-danger">
-                  {t('is_overdue')}: <b>{getDate(overdueDate)}</b>
+                  {t('is_overdue')}: <b>{localOverdueDate}</b>
                 </div>
               )}
               {isArchive && (
                 <div className="text-warning">
-                  {t('archive')}: <b>{getDate(archiveDate)}</b>
+                  {t('archive')}: <b>{localArchiveDate}</b>
                 </div>
               )}
               <OverlayTrigger
