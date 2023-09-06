@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import TodosList from 'components/TodosList/TodosList';
 import { fetchAllTodos } from 'redux/todos/operations';
-import { Filtered, getPage, getTotalTodos } from '../../redux/todos/selectors';
+import {
+  SearchQuery,
+  getPage,
+  getTotalTodos,
+} from '../../redux/todos/selectors';
 
 const Overdue = () => {
   const page = useSelector(getPage);
-  const query = useSelector(Filtered);
+  const query = useSelector(SearchQuery);
   const totalTodos = useSelector(getTotalTodos);
   const dispatch = useDispatch();
 

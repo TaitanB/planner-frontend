@@ -7,8 +7,8 @@ export default function useLocalDate(date) {
   useEffect(() => {
     if (date) {
       const userTimezone = moment.tz.guess();
-      //   console.log(userTimezone);
       const local = moment(date).tz(userTimezone).format('DD.MM.YYYY');
+
       setLocalDate(local);
     }
   }, [date]);

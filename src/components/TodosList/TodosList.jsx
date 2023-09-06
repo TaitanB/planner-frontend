@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import { Accordion, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import ScrollToTopButton from '../../helpers/ScrollToTopButton';
-import { getFilteredTodos } from '../../redux/todos/selectors';
+import { getFoundTodos } from '../../redux/todos/selectors';
 import TodosItem from '../TodosItem/TodosItem';
 
 const TodosList = () => {
   const [activeAccordionKey, setActiveAccordionKey] = useState([]);
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
-  const filteredTodos = useSelector(getFilteredTodos);
+  const foundTodos = useSelector(getFoundTodos);
 
   const { t } = useTranslation();
 
@@ -19,12 +19,12 @@ const TodosList = () => {
       !isAccordionOpen && setIsAccordionOpen(false);
       setActiveAccordionKey([]);
     },
-    [filteredTodos]
+    [foundTodos]
   );
 
   const handleToggleAccordion = () => {
     if (!isAccordionOpen && activeAccordionKey.length > 0) {
-      filteredTodos.forEach(({ _id }) => {
+      foundTodos.forEach(({ _id }) => {
         setActiveAccordionKey(prevStates => {
           if (prevStates.includes(_id)) {
             return prevStates;
@@ -34,7 +34,7 @@ const TodosList = () => {
         });
       });
     } else if (!isAccordionOpen) {
-      filteredTodos.forEach(({ _id }) => {
+      foundTodos.forEach(({ _id }) => {
         setActiveAccordionKey(prevStates => {
           return [...prevStates, _id];
         });
@@ -55,14 +55,14 @@ const TodosList = () => {
       }
     });
 
-    if (filteredTodos.length - 1 === activeAccordionKey.length) {
+    if (foundTodos.length - 1 === activeAccordionKey.length) {
       setIsAccordionOpen(prevState => !prevState);
     }
   };
 
   return (
     <div className="mb-3 pb-5 position-relative">
-      {filteredTodos.length > 0 && (
+      {foundTodos.length > 0 && (
         <Button
           variant="outline-primary"
           onClick={handleToggleAccordion}
@@ -75,7 +75,7 @@ const TodosList = () => {
       )}
 
       <ScrollToTopButton isAccordionOpen={isAccordionOpen} />
-      {filteredTodos.length !== 0 ? (
+      {foundTodos.length !== 0 ? (
         <Accordion
           flush
           alwaysOpen
@@ -83,7 +83,7 @@ const TodosList = () => {
           onSelect={handleAccordionSelect}
           className="border"
         >
-          {filteredTodos.map(
+          {foundTodos.map(
             ({
               _id,
               title,

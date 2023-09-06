@@ -29,7 +29,7 @@ function MyDatePicker({ selectedPeriod, setPlannedDate }) {
 
   const dayClassName = date => {
     const today = new Date();
-    // console.log(selectedDate, date);
+
     if (date.toDateString() === today.toDateString()) {
       return 'bg-primary text-white rounded'; // Стилі для поточної дати
     }

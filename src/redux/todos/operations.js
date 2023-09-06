@@ -37,8 +37,6 @@ export const fetchAllTodos = createAsyncThunk(
 export const fetchAddTodo = createAsyncThunk(
   'todo/addTodo',
   async (data, { rejectWithValue }) => {
-    console.log(data);
-
     try {
       const response = await axios.post('/api/todos', data);
 

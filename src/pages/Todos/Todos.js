@@ -6,13 +6,13 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 
 import AddTodosForm from 'components/TodosForm/AddTodosForm';
-import TodosFilter from '../../components/TodosFilter/TodosFilter';
+import TodosFilter from '../../components/TodosSearch/TodosSearch';
 import TodosStatistics from '../../components/TodosStatistics/TodosStatistics';
 import GetPagination from '../../components/GetPagination/GetPagination';
 import { fetchAllTodos } from 'redux/todos/operations';
 import { Loader } from 'components/Loader/Loader';
 import {
-  Filtered,
+  SearchQuery,
   getPage,
   getTotalPages,
   getTotalTodos,
@@ -22,7 +22,7 @@ import { setPage } from '../../redux/todos/todosSlice';
 export default function Todos() {
   const page = useSelector(getPage);
   const totalPages = useSelector(getTotalPages);
-  const query = useSelector(Filtered);
+  const query = useSelector(SearchQuery);
   const totalTodos = useSelector(getTotalTodos);
   const { t } = useTranslation();
   const dispatch = useDispatch();

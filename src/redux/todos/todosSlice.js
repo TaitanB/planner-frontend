@@ -14,7 +14,7 @@ const todosSlice = createSlice({
     page: 1,
     totalPages: 0,
     totalTodos: 0,
-    filter: '',
+    search: '',
     error: null,
   },
 
@@ -22,12 +22,12 @@ const todosSlice = createSlice({
     setPage: (state, { payload }) => {
       state.page = payload;
     },
-    getFilter: (state, { payload }) => {
-      state.filter = payload;
+    getSearch: (state, { payload }) => {
+      state.search = payload;
       state.page = 1;
     },
-    clearFilter(state, { payload }) {
-      state.filter = '';
+    clearSearch(state, { payload }) {
+      state.search = '';
     },
   },
   extraReducers: builder => {
@@ -80,6 +80,6 @@ const todosSlice = createSlice({
   },
 });
 
-export const { setPage, getFilter, clearFilter } = todosSlice.actions;
+export const { setPage, getSearch, clearSearch } = todosSlice.actions;
 
 export const todosReducer = todosSlice.reducer;

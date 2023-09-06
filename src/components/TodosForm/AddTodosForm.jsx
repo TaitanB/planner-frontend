@@ -38,7 +38,7 @@ export default function AddTodosForm() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(plannedDate);
+
     dispatch(fetchAddTodo({ title, description, plannedDate }));
     toast.success(`${t('todo_added')}`);
     reset();

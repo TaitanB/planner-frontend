@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import { Form, CloseButton, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { MdSearch } from 'react-icons/md';
-import { getFilter, clearFilter } from '../../redux/todos/todosSlice';
+import { getSearch, clearSearch } from '../../redux/todos/todosSlice';
 
-const TodosFilter = () => {
+const TodosSearch = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const { t } = useTranslation();
@@ -14,13 +14,12 @@ const TodosFilter = () => {
   const dispatch = useDispatch();
 
   const handleSearch = () => {
-    console.log(searchValue);
-    dispatch(getFilter(searchValue));
+    dispatch(getSearch(searchValue));
   };
 
-  const handleClearFilter = event => {
+  const handleClearSearch = event => {
     event.target.blur();
-    dispatch(clearFilter());
+    dispatch(clearSearch());
     setSearchValue('');
   };
 
@@ -39,10 +38,10 @@ const TodosFilter = () => {
         <Button onClick={handleSearch} variant="link  me-2 p-0">
           <MdSearch style={{ width: '32px', height: '32px' }} />
         </Button>
-        <CloseButton onClick={handleClearFilter} />
+        <CloseButton onClick={handleClearSearch} />
       </Form.Label>
     </Form>
   );
 };
 
-export default TodosFilter;
+export default TodosSearch;

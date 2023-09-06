@@ -4,16 +4,16 @@ export const getPage = state => state.todos.page;
 
 export const getTotalTodos = state => state.todos.totalTodos;
 
-export const Filtered = state => state.todos.filter;
+export const SearchQuery = state => state.todos.search;
 
-export const getFilteredTodos = state => {
-  if (!state.todos.filter) {
+export const getFoundTodos = state => {
+  if (!state.todos.search) {
     return state.todos.items;
   }
   const result = state.todos.items.filter(({ title, description }) => {
     return (
-      title.toLowerCase().includes(state.todos.filter.toLowerCase()) ||
-      description.toLowerCase().includes(state.todos.filter.toLowerCase())
+      title.toLowerCase().includes(state.todos.search.toLowerCase()) ||
+      description.toLowerCase().includes(state.todos.search.toLowerCase())
     );
   });
   return result;
