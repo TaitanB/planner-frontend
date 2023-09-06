@@ -1,10 +1,5 @@
 import React from 'react';
 
-import github from '../../image/github.png';
-import linkedin from '../../image/linkedin.png';
-import telegram from '../../image/telegram.png';
-import mail from '../../image/mail.png';
-
 const Footer = () => {
   return (
     <footer className="p-3 gap-3 bg-dark-subtle d-flex mt-auto align-items-center footer flex-wrap">
@@ -17,9 +12,11 @@ const Footer = () => {
             href="https://github.com/TaitanB"
             target="_blank"
             rel="noreferrer noopener"
-            className="link"
+            className="link link-opacity-50-hover"
           >
-            <img src={github} alt="github" width={32} />
+            <svg className="icon" width={32} height={32}>
+              <use href="./symbol-defs.svg#icon-github"></use>
+            </svg>
           </a>
         </li>
         <li>
@@ -27,9 +24,11 @@ const Footer = () => {
             href="https://www.linkedin.com/in/tetiana-bartoshyk/"
             target="_blank"
             rel="noreferrer noopener"
-            className="link"
+            className="link link-opacity-50-hover"
           >
-            <img src={linkedin} alt="linkedin" width={32} />
+            <svg className="icon" width={35} height={35}>
+              <use href="./symbol-defs.svg#icon-linkedin"></use>
+            </svg>
           </a>
         </li>
         <li>
@@ -37,9 +36,11 @@ const Footer = () => {
             href="https://t.me/TaitanB"
             target="_blank"
             rel="noreferrer noopener"
-            className="link"
+            className="link link-opacity-50-hover"
           >
-            <img src={telegram} alt="telegram" width={32} />
+            <svg className="icon" width={32} height={32}>
+              <use href="./symbol-defs.svg#icon-telegram"></use>
+            </svg>
           </a>
         </li>
         <li>
@@ -47,9 +48,11 @@ const Footer = () => {
             href="mailto:taitanb@gmail.com"
             target="_blank"
             rel="noreferrer noopener"
-            className="link"
+            className="link link-opacity-50-hover"
           >
-            <img src={mail} alt="mail" width={32} />
+            <svg className="icon" width={32} height={32}>
+              <use href="./symbol-defs.svg#icon-mail"></use>
+            </svg>
           </a>
         </li>
       </ul>

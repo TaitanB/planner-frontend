@@ -38,6 +38,13 @@ img {
   height: auto;
 }
 
+.icon {
+  display: inline-block;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
 .react-datepicker__input-container {
   max-width: 110px;
 }
