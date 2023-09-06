@@ -66,7 +66,7 @@ const TodosList = () => {
         <Button
           variant="outline-primary"
           onClick={handleToggleAccordion}
-          className="position-absolute bottom-0 start-0"
+          className="position-absolute bottom-0 start-0 ms-3"
         >
           {isAccordionOpen
             ? `${t('is_accordion_close')}`

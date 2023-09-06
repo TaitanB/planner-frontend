@@ -18,10 +18,10 @@
   "placeholder_title": "Enter title your todo",
   "description": "Description",
   "placeholder_description": "Enter description your todo",
-  "add_todo": "Add todo",
+  "add_todo": "Add",
   "created": "Created",
   "updated": "Updated",
-  "planned_date": "Planned completion date",
+  "planned_date": "Planned to complete",
   "completed": "Completed",
   "update_todo": "Update",
   "cancel": "Cancel",
@@ -45,7 +45,7 @@
   "todo_not_completed": "Todo not completed!",
   "add_to_archive": "Add to archive",
   "delete": "Delete",
-  "edit": "edit",
+  "edit": "Edit",
   "is_completed": "Completed?",
   "is_overdue": "Overdue",
   "week": "Week",
@@ -63,5 +63,7 @@
   "todos_completed": "Your Completed todos",
   "todos_overdue": "Your Overdue todos",
   "todos_archive": "Your Archived todos",
-  "select_date": "Select a date"
+  "select_date": "Select a date",
+  "refresh": "Refresh todo",
+  "is_refresh": "Refreshed"
 }

@@ -3,7 +3,11 @@ import { useDispatch } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
-import { MdOutlineDeleteForever, MdBorderColor } from 'react-icons/md';
+import {
+  MdOutlineDeleteForever,
+  MdBorderColor,
+  MdOutlineRefresh,
+} from 'react-icons/md';
 import { BsDatabaseCheck } from 'react-icons/bs';
 import {
   Accordion,
@@ -33,6 +37,7 @@ const TodosItem = ({
   plannedDate,
   completedDate,
   overdueDate,
+  refreshDate,
   archiveDate,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -44,6 +49,7 @@ const TodosItem = ({
 
   const isCompleted = completedDate !== null;
   const isOverdue = overdueDate !== null;
+  const isRefresh = refreshDate !== null;
   const isArchive = archiveDate !== null;
 
   const isMobileStyle = useMobileStyle();
@@ -53,6 +59,7 @@ const TodosItem = ({
   const localPlannedDate = useLocalDate(plannedDate);
   const localCompletedDate = useLocalDate(completedDate);
   const localOverdueDate = useLocalDate(overdueDate);
+  const localRefreshDate = useLocalDate(refreshDate);
   const localArchiveDate = useLocalDate(archiveDate);
 
   const handleChange = event => {
@@ -185,7 +192,7 @@ const TodosItem = ({
       <Accordion.Body className="p-3" onExited={() => setIsEditing(false)}>
         {!isEditing ? (
           <>
-            <p className="mb-3">{description}</p>
+            <p className="mb-3 border rounded p-2">{description}</p>
 
             <div className="d-flex flex-wrap gap-3 align-items-center">
               <div>
@@ -197,7 +204,7 @@ const TodosItem = ({
               <div>
                 {t('planned_date')}: <b> {localPlannedDate}</b>
               </div>
-              {overdueDate === null && (
+              {!isOverdue && (
                 <div className={isCompleted ? 'text-success' : ''}>
                   {t('completed')}:
                   <b> {isCompleted ? localCompletedDate : '??.??.????'}</b>
@@ -208,24 +215,45 @@ const TodosItem = ({
                   {t('is_overdue')}: <b>{localOverdueDate}</b>
                 </div>
               )}
+              {isRefresh && (
+                <div className="text-primary">
+                  {t('is_refresh')}: <b>{localRefreshDate}</b>
+                </div>
+              )}
               {isArchive && (
                 <div className="text-warning">
                   {t('archive')}: <b>{localArchiveDate}</b>
                 </div>
               )}
-              <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip>{`${t('edit')}`}</Tooltip>}
-              >
-                <Button
-                  disabled={isCompleted || isOverdue}
-                  className="ms-auto btn btn-primary"
-                  type="button"
-                  onClick={() => setIsEditing(true)}
+
+              {isOverdue ? (
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip>{`${t('refresh')}`}</Tooltip>}
                 >
-                  <MdBorderColor />
-                </Button>
-              </OverlayTrigger>
+                  <Button
+                    className="ms-auto btn btn-primary"
+                    type="button"
+                    // onClick={() => toRefreshTodo(_id)}
+                  >
+                    <MdOutlineRefresh />
+                  </Button>
+                </OverlayTrigger>
+              ) : (
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip>{`${t('edit')}`}</Tooltip>}
+                >
+                  <Button
+                    disabled={isCompleted}
+                    className="ms-auto btn btn-primary"
+                    type="button"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    <MdBorderColor />
+                  </Button>
+                </OverlayTrigger>
+              )}
             </div>
           </>
         ) : (

@@ -18,10 +18,10 @@
   "placeholder_title": "Введіть заголовок вашої справи",
   "description": "Опис",
   "placeholder_description": "Введіть опис вашої справи",
-  "add_todo": "Додати справу",
+  "add_todo": "Додати",
   "created": "Створено",
   "updated": "Оновлено",
-  "planned_date": "Запланована дата завершення",
+  "planned_date": "Заплановано завершити",
   "completed": "Виконано",
   "update_todo": "Оновити",
   "cancel": "Відмінити",
@@ -63,5 +63,7 @@
   "todos_completed": "Ваші Виконані справи",
   "todos_overdue": "Ваші Прострочені справи",
   "todos_archive": "Ваші Справи додані в архів",
-  "select_date": "Вибрати дату"
+  "select_date": "Вибрати дату",
+  "refresh": "Поновити",
+  "is_refresh": "Поновлено"
 }
