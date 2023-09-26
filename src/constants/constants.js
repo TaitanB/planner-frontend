@@ -8,8 +8,8 @@ export const Periods = [
   '5_years',
 ];
 
-// export const BASE_URL = 'http://localhost:3001';
-export const BASE_URL = 'https://planner-backend-se10.onrender.com';
+export const BASE_URL = 'http://localhost:3001';
+// export const BASE_URL = 'https://planner-backend-se10.onrender.com';
 
 export const nameRegex =
   /^([A-ZА-ЯЁІЇЄҐ'][A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+\s?){1,26}$|^([A-ZА-ЯЁІЇЄҐ'][a-zA-Zа-яА-ЯЁёІіЇїЄєҐґ'\s]*(?:-[A-ZА-ЯЁІЇЄҐ'][a-zA-Zа-яА-ЯЁёІіЇїЄєҐґ'\s]*)){1,26}$/;

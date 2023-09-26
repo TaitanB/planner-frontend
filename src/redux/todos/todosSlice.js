@@ -33,6 +33,7 @@ const todosSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchAllTodos.fulfilled, (state, { payload }) => {
+        // console.log(payload);
         state.totalPages = payload.totalPages;
         state.totalTodos = payload.total;
         state.items = payload.todos;
@@ -59,6 +60,7 @@ const todosSlice = createSlice({
         state.error = payload;
       })
       .addCase(fetchCompletedToggle.fulfilled, (state, { payload }) => {
+        // console.log(payload);
         state.items = state.items.map(todo => {
           if (todo._id === payload._id) {
             todo.completedDate = payload.completedDate;
@@ -71,10 +73,12 @@ const todosSlice = createSlice({
         state.error = payload;
       })
       .addCase(fetchDeleteTodo.fulfilled, (state, { payload }) => {
-        state.items = state.items.filter(item => item._id !== payload._id);
+        // console.log(payload);
+        state.items = state.items.filter(item => item._id !== payload);
         state.totalTodos -= 1;
       })
       .addCase(fetchDeleteTodo.rejected, (state, { payload }) => {
+        // console.log(payload);
         state.error = payload;
       });
   },

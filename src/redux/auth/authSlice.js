@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refreshUser } from './authOperations';
+import { register, logIn, logOut, current } from './authOperations';
+
 import { toast } from 'react-hot-toast';
 
 const initialState = {
-  user: { name: null, email: null },
+  user: {},
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -16,7 +17,7 @@ const authSlice = createSlice({
     builder
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.token = action.payload.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(register.rejected, (state, action) => {
@@ -26,27 +27,30 @@ const authSlice = createSlice({
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.token = action.payload.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(logIn.rejected, (state, action) => {
         toast.error(`Invalid registration data`);
       })
       .addCase(logOut.fulfilled, state => {
-        state.user = { name: null, email: null };
-        state.token = null;
+        state.user = {};
+        state.token = '';
         state.isLoggedIn = false;
       })
-      .addCase(refreshUser.pending, state => {
+      .addCase(current.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+      .addCase(current.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.user = action.payload.data;
+        state.token = action.payload.tokenNew;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, state => {
+      .addCase(current.rejected, state => {
         state.isRefreshing = false;
+        state.token = '';
       });
   },
 });

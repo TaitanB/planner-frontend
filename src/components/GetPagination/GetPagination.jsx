@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
+import useMobileStyle from '../../hooks/useMobileStyle';
 import Pagination from 'react-bootstrap/Pagination';
 
 export default function GetPagination({ page, totalPages, handlePageChange }) {
   const [maxVisiblePages, setMaxVisiblePages] = useState(5);
+
+  const isMobileStyle = useMobileStyle();
 
   const handleWindowSizeChange = () => {
     if (window.innerWidth < 425) {
@@ -70,7 +72,9 @@ export default function GetPagination({ page, totalPages, handlePageChange }) {
   return (
     <>
       {totalPages > 1 && (
-        <Pagination className="mx-auto mb-3">
+        <Pagination
+          className={`mx-auto mb-3 ${isMobileStyle ? 'pagination-sm' : ''}`}
+        >
           <Pagination.First
             onClick={() => handlePageChange(1)}
             disabled={isFirstPage}
