@@ -13,7 +13,6 @@ export const addTodo = async data => {
 
 export const removeTodo = async _id => {
   const { data: result } = await instance.delete(`/api/todos/delete/${_id}`);
-  //   console.log(result);
   return result;
 };
 
@@ -26,6 +25,5 @@ export const updateTodo = async (_id, description) => {
 
 export const completedTodo = async _id => {
   const { data: result } = await instance.patch(`/api/todos/completed/${_id}`);
-  //   console.log(result);
   return result;
 };

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { BASE_URL } from '../constants/constants';
+import { SERVER_URL } from '../constants/constants';
 
 const instance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: SERVER_URL,
 });
 
 const setToken = token => {
