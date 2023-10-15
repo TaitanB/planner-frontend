@@ -23,6 +23,7 @@ import {
   fetchDeleteTodo,
   fetchUpdateTodo,
   fetchCompletedToggle,
+  fetchArchivedToggle,
 } from '../../redux/todos/operations';
 import UpdateTodosForm from 'components/TodosForm/UpdateTodosForm';
 import useMobileStyle from '../../hooks/useMobileStyle';
@@ -37,8 +38,7 @@ const TodosItem = ({
   plannedDate,
   completedDate,
   overdueDate,
-  refreshDate,
-  archiveDate,
+  archivedDate,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [descriptionUpdate, setDescriptionUpdate] = useState(description);
@@ -47,10 +47,13 @@ const TodosItem = ({
 
   const { t } = useTranslation();
 
+  let refreshDate = null;
   const isCompleted = completedDate !== null;
   const isOverdue = overdueDate !== null;
+  const isArchive = archivedDate !== null;
+
+  // isOverdue && !isArchive ? (refreshDate = updatedAt) : (refreshDate = null);
   const isRefresh = refreshDate !== null;
-  const isArchive = archiveDate !== null;
 
   const isMobileStyle = useMobileStyle();
 
@@ -59,8 +62,12 @@ const TodosItem = ({
   const localPlannedDate = useLocalDate(plannedDate);
   const localCompletedDate = useLocalDate(completedDate);
   const localOverdueDate = useLocalDate(overdueDate);
+  const localArchivedDate = useLocalDate(archivedDate);
   const localRefreshDate = useLocalDate(refreshDate);
-  const localArchiveDate = useLocalDate(archiveDate);
+
+  // console.log('refreshDate => ', refreshDate);
+  // console.log('isRefresh => ', isRefresh);
+  // console.log('localRefreshDate => ', localRefreshDate);
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -99,10 +106,24 @@ const TodosItem = ({
       : toast.success(`${t('todo_not_completed')}`);
   };
 
+  const archivedToggle = _id => {
+    dispatch(fetchArchivedToggle(_id));
+
+    !isArchive
+      ? toast.success(`${t('added_to_archive')}`)
+      : toast.success(`${t('del_to_archive')}`);
+  };
+
   const handleToggle = (e, _id) => {
     e.target.blur();
 
     completedToggle(_id);
+  };
+
+  const toArchiveTodo = _id => {
+    // e.target.blur();
+
+    archivedToggle(_id);
   };
 
   const reset = () => {
@@ -133,7 +154,7 @@ const TodosItem = ({
         {isOverdue && (
           <OverlayTrigger
             placement="top"
-            overlay={<Tooltip>{t('is_overdue')}</Tooltip>}
+            overlay={<Tooltip>{t('overdue')}</Tooltip>}
           >
             <Form.Check
               isInvalid
@@ -162,15 +183,28 @@ const TodosItem = ({
         {isCompleted || isOverdue ? (
           <OverlayTrigger
             placement="top"
-            overlay={<Tooltip>{`${t('add_to_archive')}`}</Tooltip>}
+            overlay={
+              <Tooltip>
+                {isArchive && isOverdue
+                  ? `${t('refresh')}`
+                  : `${t('add_to_archive')}`}
+              </Tooltip>
+            }
           >
             <Button
               key={`archive-${_id}`}
-              className="ms-auto btn btn-success"
+              disabled={isArchive && isCompleted}
+              className={`ms-auto btn ${
+                isArchive && isOverdue ? 'btn-primary' : 'btn-success'
+              } ${isArchive && isCompleted && 'btn-warning'}`}
               type="button"
-              // onClick={() => toArchiveTodo(_id)}
+              onClick={() => toArchiveTodo(_id)}
             >
-              <BsDatabaseCheck />
+              {isArchive && isOverdue ? (
+                <MdOutlineRefresh />
+              ) : (
+                <BsDatabaseCheck />
+              )}
             </Button>
           </OverlayTrigger>
         ) : (
@@ -212,7 +246,7 @@ const TodosItem = ({
               )}
               {isOverdue && (
                 <div className="text-danger">
-                  {t('is_overdue')}: <b>{localOverdueDate}</b>
+                  {t('overdue')}: <b>{localOverdueDate}</b>
                 </div>
               )}
               {isRefresh && (
@@ -222,24 +256,24 @@ const TodosItem = ({
               )}
               {isArchive && (
                 <div className="text-warning">
-                  {t('archive')}: <b>{localArchiveDate}</b>
+                  {t('archive')}: <b>{localArchivedDate}</b>
                 </div>
               )}
 
-              {isOverdue ? (
-                <OverlayTrigger
-                  placement="top"
-                  overlay={<Tooltip>{`${t('refresh')}`}</Tooltip>}
-                >
-                  <Button
-                    className="ms-auto btn btn-primary"
-                    type="button"
-                    // onClick={() => toRefreshTodo(_id)}
-                  >
-                    <MdOutlineRefresh />
-                  </Button>
-                </OverlayTrigger>
-              ) : (
+              {!isOverdue && (
+                //   <OverlayTrigger
+                //     placement="top"
+                //     overlay={<Tooltip>{`${t('refresh')}`}</Tooltip>}
+                //   >
+                //     <Button
+                //       className="ms-auto btn btn-primary"
+                //       type="button"
+                //       // onClick={() => toRefreshTodo(_id)}
+                //     >
+                //       <MdOutlineRefresh />
+                //     </Button>
+                //   </OverlayTrigger>
+                // ) : (
                 <OverlayTrigger
                   placement="top"
                   overlay={<Tooltip>{`${t('edit')}`}</Tooltip>}
@@ -278,7 +312,7 @@ TodosItem.propTypes = {
   updatedAt: propTypes.string.isRequired,
   completedDate: propTypes.string,
   overdueDate: propTypes.string,
-  archiveDate: propTypes.string,
+  archivedDate: propTypes.string,
 };
 
 export default TodosItem;

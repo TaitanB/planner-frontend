@@ -4,7 +4,9 @@ export const getPage = state => state.todos.page;
 
 export const getTotalTodos = state => state.todos.totalTodos;
 
-export const SearchQuery = state => state.todos.search;
+export const getSearchQuery = state => state.todos.search;
+
+export const getStatusTodo = state => state.todos.status;
 
 export const getFoundTodos = state => {
   if (!state.todos.search) {

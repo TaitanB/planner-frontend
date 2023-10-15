@@ -4,9 +4,9 @@ import * as api from '../../api/todos';
 
 export const fetchAllTodos = createAsyncThunk(
   'todo/fetchAll',
-  async ({ page, query }, thunkAPI) => {
+  async ({ page, query, status }, thunkAPI) => {
     try {
-      const data = await api.getTodos(page, query);
+      const data = await api.getTodos(page, query, status);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -55,6 +55,18 @@ export const fetchCompletedToggle = createAsyncThunk(
   async (_id, { rejectWithValue }) => {
     try {
       const result = await api.completedTodo(_id);
+      return result;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const fetchArchivedToggle = createAsyncThunk(
+  'todo/archivedToggle',
+  async (_id, { rejectWithValue }) => {
+    try {
+      const result = await api.archivedTodo(_id);
       return result;
     } catch (error) {
       return rejectWithValue(error);

@@ -1,28 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
+import React from 'react';
+import { useSelector } from 'react-redux';
 import TodosList from 'components/TodosList/TodosList';
-import { fetchAllTodos } from 'redux/todos/operations';
-import {
-  SearchQuery,
-  getPage,
-  getTotalTodos,
-} from '../../redux/todos/selectors';
+import { getStatusTodo } from '../../redux/todos/selectors';
 
-export default function Todos() {
-  const page = useSelector(getPage);
-  const query = useSelector(SearchQuery);
-  const totalTodos = useSelector(getTotalTodos);
+export default function AllTodos() {
+  const status = useSelector(getStatusTodo);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAllTodos({ page, query }));
-  }, [dispatch, page, query, totalTodos]);
-
-  return (
-    <div className="d-flex flex-column">
-      <TodosList />
-    </div>
-  );
+  return <TodosList statusTodo={status} />;
 }

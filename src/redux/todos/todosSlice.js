@@ -5,6 +5,7 @@ import {
   fetchDeleteTodo,
   fetchUpdateTodo,
   fetchCompletedToggle,
+  fetchArchivedToggle,
 } from './operations.js';
 
 const todosSlice = createSlice({
@@ -15,6 +16,7 @@ const todosSlice = createSlice({
     totalPages: 0,
     totalTodos: 0,
     search: '',
+    status: '',
     error: null,
   },
 
@@ -28,6 +30,10 @@ const todosSlice = createSlice({
     },
     clearSearch(state, { payload }) {
       state.search = '';
+    },
+    getStatus: (state, { payload }) => {
+      state.status = payload;
+      state.page = 1;
     },
   },
   extraReducers: builder => {
@@ -70,6 +76,19 @@ const todosSlice = createSlice({
       .addCase(fetchCompletedToggle.rejected, (state, { payload }) => {
         state.error = payload;
       })
+      .addCase(fetchArchivedToggle.fulfilled, (state, { payload }) => {
+        state.items = state.items.map(todo => {
+          if (todo._id === payload._id) {
+            todo.archivedDate = payload.archivedDate;
+
+            return todo;
+          }
+          return todo;
+        });
+      })
+      .addCase(fetchArchivedToggle.rejected, (state, { payload }) => {
+        state.error = payload;
+      })
       .addCase(fetchDeleteTodo.fulfilled, (state, { payload }) => {
         state.items = state.items.filter(item => item._id !== payload);
         state.totalTodos -= 1;
@@ -80,6 +99,7 @@ const todosSlice = createSlice({
   },
 });
 
-export const { setPage, getSearch, clearSearch } = todosSlice.actions;
+export const { setPage, getSearch, clearSearch, getStatus } =
+  todosSlice.actions;
 
 export const todosReducer = todosSlice.reducer;

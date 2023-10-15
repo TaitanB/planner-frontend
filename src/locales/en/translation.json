@@ -44,10 +44,12 @@
   "todo_completed": "Todo completed!",
   "todo_not_completed": "Todo not completed!",
   "add_to_archive": "Add to archive",
+  "added_to_archive": "Added to archive",
+  "del_to_archive": "Todo is reopened",
   "delete": "Delete",
   "edit": "Edit",
   "is_completed": "Completed?",
-  "is_overdue": "Overdue",
+  "overdue": "Overdue",
   "week": "Week",
   "month": "Month",
   "3_months": "Three months",
@@ -56,7 +58,7 @@
   "3_years": "Three years",
   "5_years": "Five years",
   "page": "Pages",
-  "archive": "Archived",
+  "archived": "Archived",
   "helmet_profile": "Your profile",
   "is_accordion_open": "Open all",
   "is_accordion_close": "Close all",
@@ -65,5 +67,6 @@
   "todos_archive": "Your Archived todos",
   "select_date": "Select a date",
   "refresh": "Refresh todo",
-  "is_refresh": "Refreshed"
+  "is_refresh": "Refreshed",
+  "priority": "Priority"
 }

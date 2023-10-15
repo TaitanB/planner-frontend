@@ -10,12 +10,6 @@
   }
 }
 
-@media (max-width: 576px) {
-  .nav-todos {
-    width: 100%;
-  }
-}
-
 @media (min-width: 576px) {
   .custom-accordion-header {
     max-width: 296px;
