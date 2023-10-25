@@ -6,7 +6,9 @@ import {
   fetchUpdateTodo,
   fetchCompletedToggle,
   fetchArchivedToggle,
+  fetchPriorityTodos,
 } from './operations.js';
+import { StatusEnum } from '../../constants/constants';
 
 const todosSlice = createSlice({
   name: 'todos',
@@ -16,7 +18,7 @@ const todosSlice = createSlice({
     totalPages: 0,
     totalTodos: 0,
     search: '',
-    status: '',
+    status: StatusEnum.PRIORITY,
     error: null,
   },
 
@@ -38,6 +40,15 @@ const todosSlice = createSlice({
   },
   extraReducers: builder => {
     builder
+      .addCase(fetchPriorityTodos.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.totalPages = payload.totalPages;
+        state.totalTodos = payload.total;
+        state.items = payload.todos;
+      })
+      .addCase(fetchPriorityTodos.rejected, (state, { payload }) => {
+        state.error = payload;
+      })
       .addCase(fetchAllTodos.fulfilled, (state, { payload }) => {
         state.totalPages = payload.totalPages;
         state.totalTodos = payload.total;

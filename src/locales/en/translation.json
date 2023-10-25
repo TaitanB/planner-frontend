@@ -68,5 +68,7 @@
   "select_date": "Select a date",
   "refresh": "Refresh todo",
   "is_refresh": "Refreshed",
-  "priority": "Priority"
+  "priority": "Priority?",
+  "add_priority": "Added to priority!",
+  "delete_priority": "Deleted from priority!"
 }

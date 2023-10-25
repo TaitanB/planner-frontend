@@ -16,8 +16,8 @@ export const StatusEnum = {
   ARCHIVED: 'archived',
 };
 
-export const SERVER_URL = 'http://localhost:3001';
-// export const SERVER_URL = 'https://planner-backend-se10.onrender.com';
+// export const SERVER_URL = 'http://localhost:3001';
+export const SERVER_URL = 'https://planner-backend-se10.onrender.com';
 
 export const nameRegex =
   /^([A-ZА-ЯЁІЇЄҐ'][A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+\s?){1,26}$|^([A-ZА-ЯЁІЇЄҐ'][a-zA-Zа-яА-ЯЁёІіЇїЄєҐґ'\s]*(?:-[A-ZА-ЯЁІЇЄҐ'][a-zA-Zа-яА-ЯЁёІіЇїЄєҐґ'\s]*)){1,26}$/;

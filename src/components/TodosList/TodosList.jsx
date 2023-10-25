@@ -4,13 +4,16 @@ import { Accordion, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import ScrollToTopButton from '../../helpers/ScrollToTopButton';
 import { getFoundTodos } from '../../redux/todos/selectors';
+import { getPriorityTodo } from '../../redux/auth/authSelectors';
 import TodosItem from '../TodosItem/TodosItem';
-import { fetchAllTodos } from 'redux/todos/operations';
+import { fetchAllTodos, fetchPriorityTodos } from 'redux/todos/operations';
+
 import {
   getSearchQuery,
   getPage,
   getTotalTodos,
 } from '../../redux/todos/selectors';
+import { StatusEnum } from '../../constants/constants';
 
 const TodosList = ({ statusTodo }) => {
   const [activeAccordionKey, setActiveAccordionKey] = useState([]);
@@ -23,25 +26,31 @@ const TodosList = ({ statusTodo }) => {
   const query = useSelector(getSearchQuery);
   const totalTodos = useSelector(getTotalTodos);
   const status = statusTodo;
+  const foundTodos = useSelector(getFoundTodos);
+  const priority = useSelector(getPriorityTodo);
+  const todos = foundTodos;
 
   useEffect(() => {
     // console.log('TodosList useEffect');
-    dispatch(fetchAllTodos({ page, query, status }));
-  }, [dispatch, page, query, totalTodos, status]);
 
-  const foundTodos = useSelector(getFoundTodos);
+    if (status === StatusEnum.PRIORITY) {
+      dispatch(fetchPriorityTodos({ page, query }));
+    } else {
+      dispatch(fetchAllTodos({ page, query, status }));
+    }
+  }, [dispatch, page, query, totalTodos, priority, status]);
 
   useEffect(
     isAccordionOpen => {
       !isAccordionOpen && setIsAccordionOpen(false);
       setActiveAccordionKey([]);
     },
-    [foundTodos]
+    [todos]
   );
 
   const handleToggleAccordion = () => {
     if (!isAccordionOpen && activeAccordionKey.length > 0) {
-      foundTodos.forEach(({ _id }) => {
+      todos.forEach(({ _id }) => {
         setActiveAccordionKey(prevStates => {
           if (prevStates.includes(_id)) {
             return prevStates;
@@ -51,7 +60,7 @@ const TodosList = ({ statusTodo }) => {
         });
       });
     } else if (!isAccordionOpen) {
-      foundTodos.forEach(({ _id }) => {
+      todos.forEach(({ _id }) => {
         setActiveAccordionKey(prevStates => {
           return [...prevStates, _id];
         });
@@ -72,14 +81,14 @@ const TodosList = ({ statusTodo }) => {
       }
     });
 
-    if (foundTodos.length - 1 === activeAccordionKey.length) {
+    if (todos.length - 1 === activeAccordionKey.length) {
       setIsAccordionOpen(prevState => !prevState);
     }
   };
 
   return (
     <div className="mb-3 pb-5 position-relative d-flex flex-column">
-      {foundTodos.length > 0 && (
+      {todos && todos.length > 0 && (
         <Button
           variant="outline-primary"
           onClick={handleToggleAccordion}
@@ -90,9 +99,8 @@ const TodosList = ({ statusTodo }) => {
             : `${t('is_accordion_open')}`}
         </Button>
       )}
-
       <ScrollToTopButton isAccordionOpen={isAccordionOpen} />
-      {foundTodos.length !== 0 ? (
+      {todos && todos.length !== 0 ? (
         <>
           <Accordion
             flush
@@ -101,7 +109,7 @@ const TodosList = ({ statusTodo }) => {
             onSelect={handleAccordionSelect}
             className="border"
           >
-            {foundTodos.map(
+            {todos.map(
               ({
                 _id,
                 title,

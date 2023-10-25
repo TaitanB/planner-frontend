@@ -9,26 +9,33 @@ import AddTodosForm from 'components/TodosForm/AddTodosForm';
 import TodosFilter from '../../components/TodosSearch/TodosSearch';
 import TodosStatuses from '../../components/TodosStatuses/TodosStatuses';
 import GetPagination from '../../components/GetPagination/GetPagination';
-import { fetchAllTodos } from 'redux/todos/operations';
+import { fetchAllTodos, fetchPriorityTodos } from 'redux/todos/operations';
 import { Loader } from 'components/Loader/Loader';
 import {
   getSearchQuery,
   getPage,
   getTotalPages,
+  getStatusTodo,
 } from '../../redux/todos/selectors';
 import { setPage } from '../../redux/todos/todosSlice';
+import { StatusEnum } from '../../constants/constants';
 
 export default function Todos() {
   const page = useSelector(getPage);
   const totalPages = useSelector(getTotalPages);
   const query = useSelector(getSearchQuery);
+  const status = useSelector(getStatusTodo);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const handlePageChange = newPage => {
     dispatch(setPage(newPage));
-    dispatch(fetchAllTodos({ page: newPage, query }));
+    if (status === StatusEnum.PRIORITY) {
+      dispatch(fetchPriorityTodos({ page: newPage, query }));
+    } else {
+      dispatch(fetchAllTodos({ page: newPage, query, status }));
+    }
   };
 
   return (

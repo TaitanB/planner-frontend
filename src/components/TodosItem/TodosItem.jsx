@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
@@ -24,10 +24,12 @@ import {
   fetchUpdateTodo,
   fetchCompletedToggle,
   fetchArchivedToggle,
+  fetchTogglePriorityTodo,
 } from '../../redux/todos/operations';
 import UpdateTodosForm from 'components/TodosForm/UpdateTodosForm';
 import useMobileStyle from '../../hooks/useMobileStyle';
 import useLocalDate from '../../hooks/useLocalDate';
+import { getPriorityTodo } from '../../redux/auth/authSelectors';
 
 const TodosItem = ({
   _id,
@@ -51,8 +53,8 @@ const TodosItem = ({
   const isCompleted = completedDate !== null;
   const isOverdue = overdueDate !== null;
   const isArchive = archivedDate !== null;
+  const priorityTodo = useSelector(getPriorityTodo);
 
-  // isOverdue && !isArchive ? (refreshDate = updatedAt) : (refreshDate = null);
   const isRefresh = refreshDate !== null;
 
   const isMobileStyle = useMobileStyle();
@@ -64,10 +66,6 @@ const TodosItem = ({
   const localOverdueDate = useLocalDate(overdueDate);
   const localArchivedDate = useLocalDate(archivedDate);
   const localRefreshDate = useLocalDate(refreshDate);
-
-  // console.log('refreshDate => ', refreshDate);
-  // console.log('isRefresh => ', isRefresh);
-  // console.log('localRefreshDate => ', localRefreshDate);
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -96,6 +94,16 @@ const TodosItem = ({
     dispatch(fetchDeleteTodo(_id));
 
     toast.success(`${t('todo_deleted')}`);
+  };
+
+  const isPriority = priorityTodo.includes(_id);
+  console.log(isPriority);
+  const togglePriorityTodo = _id => {
+    dispatch(fetchTogglePriorityTodo(_id));
+
+    !isPriority
+      ? toast.success(`${t('add_priority')}`)
+      : toast.success(`${t('delete_priority')}`);
   };
 
   const completedToggle = _id => {
@@ -161,6 +169,24 @@ const TodosItem = ({
               defaultChecked
               type="radio"
               id={`toggle-check-${_id}`}
+            />
+          </OverlayTrigger>
+        )}
+        {!isOverdue && !isCompleted && (
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip>{t('priority')}</Tooltip>}
+          >
+            <Form.Check
+              // aria-label="option 2"
+              id={`priority-check-${_id}`}
+              type="checkbox"
+              isValid
+              checked={isPriority}
+              variant="outline-primary"
+              disabled={isEditing === true}
+              // value="1"
+              onChange={() => togglePriorityTodo(_id)}
             />
           </OverlayTrigger>
         )}

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { register, logIn, logOut, current } from './authOperations';
-
+import { fetchTogglePriorityTodo } from '../todos/operations';
 import { toast } from 'react-hot-toast';
 
 const initialState = {
@@ -15,6 +15,12 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
+      .addCase(fetchTogglePriorityTodo.fulfilled, (state, { payload }) => {
+        state.user.priority = payload.result.priority;
+      })
+      .addCase(fetchTogglePriorityTodo.rejected, (state, { payload }) => {
+        state.error = payload;
+      })
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.accessToken;

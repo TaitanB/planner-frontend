@@ -14,6 +14,31 @@ export const fetchAllTodos = createAsyncThunk(
   }
 );
 
+export const fetchPriorityTodos = createAsyncThunk(
+  'todo/fetchPriority',
+  async ({ page, query }, thunkAPI) => {
+    console.log(page, query);
+    try {
+      const data = await api.getTodos(page, query);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const fetchTogglePriorityTodo = createAsyncThunk(
+  'todo/togglePriority',
+  async (_id, { rejectWithValue }) => {
+    try {
+      const result = await api.togglePriority(_id);
+      return { _id, result };
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const fetchAddTodo = createAsyncThunk(
   'todo/addTodo',
   async (data, { rejectWithValue }) => {
