@@ -88,8 +88,16 @@ const todosSlice = createSlice({
         state.error = payload;
       })
       .addCase(fetchArchivedToggle.fulfilled, (state, { payload }) => {
+        console.log(payload);
         state.items = state.items.map(todo => {
           if (todo._id === payload._id) {
+            if (todo.archivedDate !== null) {
+              todo.archivedDate = payload.archivedDate;
+              todo.overdueDate = payload.overdueDate;
+              todo.plannedDate = payload.plannedDate;
+              todo.updatedAt = payload.updatedAt;
+            }
+
             todo.archivedDate = payload.archivedDate;
 
             return todo;

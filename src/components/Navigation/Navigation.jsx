@@ -38,10 +38,10 @@ export const Navigation = ({ showMenu, setShowMenu }) => {
           </NavLink>
           <NavLink
             className="nav-link d-flex align-items-center justify-content-center"
-            to="/wheelOfLife"
+            to="/statistics"
             onClick={handleClick}
           >
-            {t('header_wheel_of_life')}
+            {t('header_statistics')}
           </NavLink>
           <NavLink
             className="nav-link d-flex align-items-center justify-content-center"

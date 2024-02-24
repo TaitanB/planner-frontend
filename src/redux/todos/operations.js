@@ -17,7 +17,7 @@ export const fetchAllTodos = createAsyncThunk(
 export const fetchPriorityTodos = createAsyncThunk(
   'todo/fetchPriority',
   async ({ page, query }, thunkAPI) => {
-    console.log(page, query);
+    // console.log(page, query);
     try {
       const data = await api.getTodos(page, query);
       return data;

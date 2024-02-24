@@ -56,7 +56,7 @@ const TodosItem = ({
   const priorityTodo = useSelector(getPriorityTodo);
 
   const isRefresh = refreshDate !== null;
-
+  const isPriority = priorityTodo.includes(_id);
   const isMobileStyle = useMobileStyle();
 
   const localCreatedAt = useLocalDate(createdAt);
@@ -96,8 +96,6 @@ const TodosItem = ({
     toast.success(`${t('todo_deleted')}`);
   };
 
-  const isPriority = priorityTodo.includes(_id);
-  console.log(isPriority);
   const togglePriorityTodo = _id => {
     dispatch(fetchTogglePriorityTodo(_id));
 
@@ -108,7 +106,7 @@ const TodosItem = ({
 
   const completedToggle = _id => {
     dispatch(fetchCompletedToggle(_id));
-
+    refreshDate = new Date();
     !isCompleted
       ? toast.success(`${t('todo_completed')}`)
       : toast.success(`${t('todo_not_completed')}`);
@@ -175,17 +173,15 @@ const TodosItem = ({
         {!isOverdue && !isCompleted && (
           <OverlayTrigger
             placement="top"
-            overlay={<Tooltip>{t('priority')}</Tooltip>}
+            overlay={<Tooltip>{t('priority?')}</Tooltip>}
           >
             <Form.Check
-              // aria-label="option 2"
               id={`priority-check-${_id}`}
               type="checkbox"
               isValid
               checked={isPriority}
               variant="outline-primary"
               disabled={isEditing === true}
-              // value="1"
               onChange={() => togglePriorityTodo(_id)}
             />
           </OverlayTrigger>
@@ -282,24 +278,11 @@ const TodosItem = ({
               )}
               {isArchive && (
                 <div className="text-warning">
-                  {t('archive')}: <b>{localArchivedDate}</b>
+                  {t('archived')}: <b>{localArchivedDate}</b>
                 </div>
               )}
 
               {!isOverdue && (
-                //   <OverlayTrigger
-                //     placement="top"
-                //     overlay={<Tooltip>{`${t('refresh')}`}</Tooltip>}
-                //   >
-                //     <Button
-                //       className="ms-auto btn btn-primary"
-                //       type="button"
-                //       // onClick={() => toRefreshTodo(_id)}
-                //     >
-                //       <MdOutlineRefresh />
-                //     </Button>
-                //   </OverlayTrigger>
-                // ) : (
                 <OverlayTrigger
                   placement="top"
                   overlay={<Tooltip>{`${t('edit')}`}</Tooltip>}

@@ -1,7 +1,7 @@
 {
   "header_home": "Home",
   "header_todos": "Todos",
-  "header_wheel_of_life": "Wheel Of Life",
+  "header_statistics": "Statistics",
   "header_profile": "Profile",
   "register": "Register",
   "login": "Log In",
@@ -68,7 +68,8 @@
   "select_date": "Select a date",
   "refresh": "Refresh todo",
   "is_refresh": "Refreshed",
-  "priority": "Priority?",
+  "priority?": "Priority?",
+  "priority": "Priority",
   "add_priority": "Added to priority!",
   "delete_priority": "Deleted from priority!"
 }

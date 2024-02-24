@@ -31,8 +31,8 @@ const TodosList = ({ statusTodo }) => {
   const todos = foundTodos;
 
   useEffect(() => {
-    // console.log('TodosList useEffect');
-
+    console.log('TodosList useEffect');
+    console.log(status);
     if (status === StatusEnum.PRIORITY) {
       dispatch(fetchPriorityTodos({ page, query }));
     } else {

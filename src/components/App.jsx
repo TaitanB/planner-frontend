@@ -17,7 +17,7 @@ const RegisterPage = lazy(() => import('../pages/Register/Register'));
 const LoginPage = lazy(() => import('../pages/Login/Login'));
 const TodosPage = lazy(() => import('../pages/Todos/Todos'));
 const ProfilePage = lazy(() => import('../pages/Profile/Profile'));
-const WheelOfLifePage = lazy(() => import('../pages/WheelOfLife/WheelOfLife'));
+const StatisticsPage = lazy(() => import('../pages/Statistics/Statistics'));
 const NotFoundPage = lazy(() => import('../pages/NotFound/NotFound'));
 const AllTodos = lazy(() => import('../components/AllTodos/AllTodos'));
 
@@ -62,11 +62,11 @@ export const App = () => {
             <Route index element={<AllTodos />} />
           </Route>
           <Route
-            path="/wheelOfLife"
+            path="/statistics"
             element={
               <PrivateRoute
                 redirectTo="/login"
-                component={<WheelOfLifePage />}
+                component={<StatisticsPage />}
               />
             }
           />

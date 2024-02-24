@@ -20,7 +20,7 @@ const TodosStatuses = () => {
   const { t } = useTranslation();
 
   const handleStatusChange = status => {
-    console.log(status);
+    // console.log(status);
     dispatch(getStatus(status));
   };
 
@@ -37,7 +37,7 @@ const TodosStatuses = () => {
             name="groupStatus"
             className="btn-check"
             type="radio"
-            defaultChecked={status === StatusEnum.PRIORITY}
+            checked={status === statusTodo}
             onChange={() => handleStatusChange(status)}
           />
           <Form.Check.Label className="btn btn-outline-primary">

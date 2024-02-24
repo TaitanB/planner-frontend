@@ -1,7 +1,7 @@
 {
   "header_home": "Домашня сторінка",
   "header_todos": "Справи",
-  "header_wheel_of_life": "Колесо життя",
+  "header_statistics": "Статистика",
   "header_profile": "Профіль",
   "register": "Зареєструватися",
   "login": "Увійти",
@@ -68,7 +68,8 @@
   "select_date": "Вибрати дату",
   "refresh": "Поновити",
   "is_refresh": "Поновлено",
-  "priority": "Пріоритетна?",
+  "priority?": "Пріоритетна?",
+  "priority": "Пріоритетні",
   "add_priority": "Додано до пріоритетних!",
   "delete_priority": "Видалено з пріоритетних!"
 }
